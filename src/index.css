@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 140 10% 97%;
+    --foreground: 157 72% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 157 72% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 157 72% 10%;
+
+    --primary: 157 72% 14%;
+    --primary-foreground: 45 30% 95%;
+
+    --secondary: 20 18% 28%;
+    --secondary-foreground: 45 30% 95%;
+
+    --muted: 140 10% 92%;
+    --muted-foreground: 157 20% 35%;
+
+    --accent: 41 55% 51%;
+    --accent-foreground: 157 72% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 140 15% 85%;
+    --input: 140 15% 85%;
+    --ring: 41 55% 51%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 157 72% 10%;
+    --sidebar-foreground: 45 30% 95%;
+    --sidebar-primary: 41 55% 51%;
+    --sidebar-primary-foreground: 157 72% 10%;
+    --sidebar-accent: 157 50% 18%;
+    --sidebar-accent-foreground: 45 30% 95%;
+    --sidebar-border: 157 50% 18%;
+    --sidebar-ring: 41 55% 51%;
+
+    /* Custom tokens */
+    --gold: 41 55% 51%;
+    --gold-light: 41 60% 70%;
+    --earth: 20 18% 28%;
+    --earth-light: 20 15% 45%;
+    --forest: 157 72% 14%;
+    --forest-light: 157 40% 25%;
+    --cream: 40 30% 95%;
+
+    font-family: 'Inter', sans-serif;
+  }
+
+  .dark {
+    --background: 157 72% 6%;
+    --foreground: 45 30% 95%;
+    --card: 157 50% 10%;
+    --card-foreground: 45 30% 95%;
+    --popover: 157 50% 10%;
+    --popover-foreground: 45 30% 95%;
+    --primary: 41 55% 51%;
+    --primary-foreground: 157 72% 10%;
+    --secondary: 20 18% 35%;
+    --secondary-foreground: 45 30% 95%;
+    --muted: 157 30% 15%;
+    --muted-foreground: 140 10% 60%;
+    --accent: 41 55% 51%;
+    --accent-foreground: 157 72% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 157 30% 18%;
+    --input: 157 30% 18%;
+    --ring: 41 55% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(41 55% 51%), hsl(41 60% 70%));
+  }
+
+  .bg-forest-gradient {
+    background: linear-gradient(135deg, hsl(157 72% 14%), hsl(157 50% 20%));
+  }
+
+  .bg-overlay-dark {
+    background: linear-gradient(to bottom, hsla(157, 72%, 8%, 0.7), hsla(157, 72%, 6%, 0.85));
+  }
+
+  .gold-underline {
+    @apply relative inline-block;
+  }
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5;
+    background: hsl(41 55% 51%);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+  }
+  .gold-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+@layer utilities {
+  .animate-count-up {
+    animation: countUp 2s ease-out forwards;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
