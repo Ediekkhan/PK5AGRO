@@ -12,7 +12,7 @@ const Footer = () => {
               PK5<span className="text-gold"> Agro</span>
             </h3>
             <p className="font-body text-primary-foreground/60 text-sm leading-relaxed">
-              Cultivating excellence across Nigeria's agricultural landscape since 2009.
+              Cultivating excellence across Nigeria's agricultural landscape since 2025.
             </p>
           </div>
 

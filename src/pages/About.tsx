@@ -74,9 +74,9 @@ const About = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { name: "Adewale Okoro", role: "CEO & Founder" },
-              { name: "Ngozi Eze", role: "Head of Operations" },
-              { name: "Ibrahim Musa", role: "Director of Exports" },
+              { name: "Prince Nnaemeka Njoku", role: "CEO & Founder" },
+              { name: "Peter Eziakor", role: "Head of Facilities & Production" },
+              { name: "Alozie Okwukanma", role: "Head of IT" },
             ].map((person) => (
               <div key={person.name} className="p-6 rounded-lg bg-card shadow-sm border border-border">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
