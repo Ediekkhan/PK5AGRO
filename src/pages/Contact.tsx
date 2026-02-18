@@ -79,7 +79,16 @@ const Contact = () => {
 
               {/* Map placeholder */}
               <div className="rounded-xl overflow-hidden border border-border h-48 bg-muted flex items-center justify-center">
-                <p className="font-body text-sm text-muted-foreground">Map Integration</p>
+                <iframe
+                  title="Office Location"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps?q=Apt.%20B%20Imanium%20Estate,%20Nathaniel%20Akpan%20Street,%20Off%20Ekpri%20Nsukara,%20Uyo,%20Akwa%20Ibom%20State&output=embed"
+                />
               </div>
             </div>
 
