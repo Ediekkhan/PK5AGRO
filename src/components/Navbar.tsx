@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import logo from '../assets/PK5 Agro-allied logo.png'
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -34,7 +35,8 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
       <div className="container-wide flex items-center justify-between h-16 md:h-20 px-4 sm:px-6 lg:px-8">
         <Link to="/" className="font-display text-xl md:text-2xl font-bold text-primary-foreground tracking-wide">
-          PK5<span className="text-gold"> Agro</span>
+          {/* PK5<span className="text-gold"> Agro</span> */}
+          <img src={logo} alt="" />
         </Link>
 
         {/* Desktop nav */}
