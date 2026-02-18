@@ -55,19 +55,19 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60">
-                  Lagos, Nigeria
+                  Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara. Uyo. Akwa Ibom State.
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-gold shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60">
-                  +234 800 000 0000
+                  +2348026133205
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-gold shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60">
-                  info@pk5agro.com
+                  pk5nigltd@hotmail.com
                 </span>
               </div>
             </div>
