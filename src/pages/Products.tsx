@@ -1,3 +1,7 @@
+// import palmKernelImg from "@/assets/palm-kernel.jpg";
+// import cocoaImg from "@/assets/cocoa.jpg";
+// import plantainImg from "@/assets/plantain.jpg";
+
 import palmKernelImg from "@/assets/pk5_palm.jpeg";
 import cocoaImg from "@/assets/pk5_cocoa.jpeg";
 import plantainImg from "@/assets/pk5_plantain.jpeg";
