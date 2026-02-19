@@ -33,7 +33,7 @@ const SustainabilitySection = () => {
               Community Empowerment
             </h3>
             <p className="font-body text-muted-foreground text-sm leading-relaxed">
-              Over 2,000 local farmers benefit from our outreach programs,
+              Over 1,000 local farmers benefit from our outreach programs,
               training initiatives, and fair-trade partnerships.
             </p>
           </div>

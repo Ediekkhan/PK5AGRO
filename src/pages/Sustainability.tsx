@@ -26,17 +26,17 @@ const Sustainability = () => {
                   "Sustainable crop rotation practices",
                   "Organic fertilizer and pest management",
                   "Rainwater harvesting systems",
-                  "Reforestation programs on degraded land",
+                  "Soil conservation programs",
                 ],
               },
               {
                 icon: Users,
                 title: "Community Empowerment",
                 points: [
-                  "Training programs for 2,000+ local farmers",
+                  "Training programs for 1,000+ local farmers",
                   "Fair pricing and transparent procurement",
                   "Infrastructure development in farming communities",
-                  "Educational scholarships for farmers' children",
+                  "Water stewardship frameworks",
                 ],
               },
               {

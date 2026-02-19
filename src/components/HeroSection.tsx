@@ -20,7 +20,7 @@ const HeroSection = () => {
         </h1>
         <p className="font-body text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-delay-2">
           From fertile Nigerian farmlands to global markets — premium Palm Kernel,
-          Cocoa, and Plantain products cultivated with care and processed to perfection.
+          Cocoa, and plantains products cultivated with care and processed to perfection.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in-delay-3">
           <Button asChild variant="gold" size="lg">

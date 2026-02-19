@@ -36,7 +36,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-semibold mb-4 text-gold">Products</h4>
             <div className="flex flex-col gap-2">
-              {["Palm Kernel", "Cocoa", "Plantain"].map((item) => (
+              {["Palm Kernel", "Cocoa", "plantains"].map((item) => (
                 <Link
                   key={item}
                   to="/products"
@@ -67,7 +67,7 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-gold shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60">
-                  pk5nigltd@hotmail.com
+                  info@agroallied.com
                 </span>
               </div>
             </div>

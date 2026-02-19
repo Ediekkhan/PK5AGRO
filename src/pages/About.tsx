@@ -24,18 +24,16 @@ const About = () => {
             <Target className="w-10 h-10 text-accent mb-4" />
             <h2 className="font-display text-2xl font-bold text-foreground mb-4">Our Mission</h2>
             <p className="font-body text-muted-foreground leading-relaxed">
-              To be Africa's most trusted agro-allied company by cultivating premium crops,
-              applying innovative processing techniques, and building enduring partnerships
-              that benefit farmers, communities, and global markets.
+              To development of a large-scale commercial agricultural production and integrated agro-processing project 
+              designed to unlock agricultural potential and establish value addition capacity.
             </p>
           </div>
           <div className="p-8 rounded-xl bg-accent/5 border border-accent/10">
             <Eye className="w-10 h-10 text-accent mb-4" />
             <h2 className="font-display text-2xl font-bold text-foreground mb-4">Our Vision</h2>
             <p className="font-body text-muted-foreground leading-relaxed">
-              A future where Nigerian agriculture leads the global stage — powered by
-              sustainability, technology, and an unwavering commitment to quality in every
-              harvest and every product we deliver.
+              A future committed to transforming agriculture from a subsistence-based activity into a 
+              productivity-driven industrial sector.
             </p>
           </div>
         </div>
@@ -74,15 +72,18 @@ const About = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { name: "Prince Nnaemeka Njoku", role: "CEO & Founder" },
-              { name: "Peter Eziakor", role: "Head of Facilities & Production" },
-              { name: "Alozie Okwukanma", role: "Head of IT" },
+              { name: "Prince Nnaemeka Njoku", role: "CEO & Founder", image: "../../src/assets/leaderImg/Prince.jpeg" },
+              { name: "Peter Eziakor", role: "Head of Facilities & Production", image: "../../src/assets/leaderImg/Peter.jpeg" },
+              { name: "Alozie Okwukanma", role: "Head of IT", image: "../../src/assets/leaderImg/Alozie.jpeg" },
             ].map((person) => (
               <div key={person.name} className="p-6 rounded-lg bg-card shadow-sm border border-border">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="font-display text-2xl font-bold text-primary">
-                    {person.name.split(" ").map(n => n[0]).join("")}
-                  </span>
+                <div className="w-20 h-24 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                  {/* {person.name.split(" ").map(n => n[0]).join("")} */}
+                  <img
+                    src={person.image}
+                    alt={person.name}
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="font-display text-lg font-semibold text-foreground">{person.name}</h3>
                 <p className="font-body text-muted-foreground text-sm">{person.role}</p>

@@ -1,6 +1,6 @@
 import palmKernelImg from "@/assets/pk5_palm.jpeg";
 import cocoaImg from "@/assets/pk5_cocoa.jpeg";
-import plantainImg from "@/assets/pk5_plantain.jpeg";
+import plantainImg from "@/assets/plantains.jpeg";
 
 const productData = [
   {
