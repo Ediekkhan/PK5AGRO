@@ -38,7 +38,7 @@ const AboutPreview = () => {
             <p className="font-body text-muted-foreground leading-relaxed mb-6">
               PK5 Agro Allied is a leading Nigerian agro-allied company specializing in the
               cultivation, processing, and export of premium agricultural commodities. With over
-              5,000 hectares of farmland and state-of-the-art processing facilities, we bridge
+              3,000 hectares of farmland and state-of-the-art processing facilities, we bridge
               the gap between traditional farming excellence and modern market demands.
             </p>
             <p className="font-body text-muted-foreground leading-relaxed">
