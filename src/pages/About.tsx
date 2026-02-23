@@ -1,4 +1,7 @@
 import { Leaf, Shield, Lightbulb, Award, Eye, Target } from "lucide-react";
+import princeImg from "../../src/assets/leaderImg/Prince.jpeg";
+import peterImg from "../../src/assets/leaderImg/Peter.jpeg";
+import alozieImg from "../../src/assets/leaderImg/Alozie.jpeg";
 
 const About = () => {
   return (
@@ -72,9 +75,9 @@ const About = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { name: "Prince Nnaemeka Njoku", role: "CEO & Founder", image: "../../src/assets/leaderImg/Prince.jpeg" },
-              { name: "Peter Eziakor", role: "Head of Facilities & Production", image: "../../src/assets/leaderImg/Peter.jpeg" },
-              { name: "Alozie Okwukanma", role: "Head of IT", image: "../../src/assets/leaderImg/Alozie.jpeg" },
+              { name: "Prince Nnaemeka Njoku", role: "CEO & Founder", image: princeImg },
+              { name: "Peter Eziakor", role: "Head of Facilities & Production", image: peterImg},
+              { name: "Alozie Okwukanma", role: "Head of IT", image: alozieImg},
             ].map((person) => (
               <div key={person.name} className="p-6 rounded-lg bg-card shadow-sm border border-border">
                 <div className="w-20 h-24 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
