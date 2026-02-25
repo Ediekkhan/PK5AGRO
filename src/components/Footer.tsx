@@ -50,26 +50,47 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display text-lg font-semibold mb-4 text-gold">Contact Us</h4>
+            <h4 className="font-display text-lg font-semibold mb-4 text-gold">
+              Contact Us
+            </h4>
+
             <div className="flex flex-col gap-3">
-              <div className="flex items-start gap-3">
+
+              {/* Address → Google Maps */}
+              <a
+                href="https://www.google.com/maps?q=5901%20Peachtree%20Dunwoody%20Road,%20Suite%20A310,%20Atlanta,%20GA%2030328,%20USA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 hover:text-gold transition-colors"
+              >
                 <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
-                <span className="font-body text-sm text-primary-foreground/60">
-                  Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara. Uyo. Akwa Ibom State.
+                <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
+                  Head Office: 5901 Peachtree Dunwoody Road, Suite A310, Atlanta, GA 30328, USA
                 </span>
-              </div>
-              <div className="flex items-center gap-3">
+              </a>
+
+              {/* Phone */}
+              <a
+                href="tel:+2348026133205"
+                className="flex items-center gap-3 hover:text-gold transition-colors"
+              >
                 <Phone className="w-4 h-4 text-gold shrink-0" />
-                <span className="font-body text-sm text-primary-foreground/60">
+                <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
                   +2348026133205
                 </span>
-              </div>
-              <div className="flex items-center gap-3">
+              </a>
+
+              {/* Email */}
+              <a
+                href="mailto:info@agroallied.com"
+                className="flex items-center gap-3 hover:text-gold transition-colors"
+              >
                 <Mail className="w-4 h-4 text-gold shrink-0" />
-                <span className="font-body text-sm text-primary-foreground/60">
+                <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
                   info@agroallied.com
                 </span>
-              </div>
+              </a>
+
             </div>
           </div>
         </div>

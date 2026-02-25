@@ -43,7 +43,7 @@ const Contact = () => {
                       <MapPin className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">Head Office</h3>
+                      <h3 className="font-body text-sm font-semibold text-foreground">Branch Office</h3>
                       <p className="font-body text-sm text-muted-foreground">Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara. Uyo. Akwa Ibom State.</p>
                     </div>
                   </div>
