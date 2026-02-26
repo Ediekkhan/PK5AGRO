@@ -19,7 +19,7 @@ function Contact() {
     company: "", // Added company to state
     inquiryType: "", 
     message: "" ,
-    appId: "com.pk5.agro"
+    appId: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +36,7 @@ function Contact() {
     phoneNumber: form.phone,
     company: form.company || "Individual",
     subject: form.inquiryType,
-    appId: form.appId,
+    appId: "com.pk5.agro",
     messageBody: form.message
   };
 
