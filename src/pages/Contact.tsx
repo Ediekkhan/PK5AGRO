@@ -18,7 +18,8 @@ function Contact() {
     phone: "", 
     company: "", // Added company to state
     inquiryType: "", 
-    message: "" 
+    message: "" ,
+    appId: "com.pk5.agro"
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,6 +36,7 @@ function Contact() {
     phoneNumber: form.phone,
     company: form.company || "Individual",
     subject: form.inquiryType,
+    appId: form.appId,
     messageBody: form.message
   };
 
@@ -48,7 +50,7 @@ function Contact() {
       description: response.responseMessage || "Your message has been received." 
     });
     
-    setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" });
+    setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" , appId:form.appId});
   } catch (error) {
     toast({
       variant: "destructive",
