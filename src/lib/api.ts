@@ -19,10 +19,15 @@ export const api = {
       body: JSON.stringify(data),
     });
 
+    // Parse the response body
+    const result = await response.json();
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.message || "Failed to send message");
     }
-    return response.json();
+    
+    // return response.json();
+    return result;
   },
 };

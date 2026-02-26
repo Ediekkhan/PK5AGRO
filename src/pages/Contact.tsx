@@ -22,38 +22,43 @@ function Contact() {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Split Full Name into First and Last for the backend
-    const nameParts = form.fullName.trim().split(" ");
-    const firstName = nameParts[0] || "";
-    const lastName = nameParts.slice(1).join(" ") || "N/A";
-
-    try {
-      await api.sendContactForm({
-        id: 0,
-        firstName,
-        lastName,
-        email: form.email,
-        phoneNumber: form.phone,
-        company: form.company || "Individual",
-        subject: form.inquiryType,
-        messageBody: form.message
-      });
-
-      toast({ title: "Message Sent!", description: "We'll get back to you within 24 hours." });
-      setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" });
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error instanceof Error ? error.message : "Something went wrong.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  // Name splitting logic remains the same...
+  const [fName, ...lNameParts] = form.fullName.trim().split(" ");
+  const payload = {
+    id: 0,
+    firstName: fName || "",
+    lastName: lNameParts.join(" ") || "N/A",
+    email: form.email,
+    phoneNumber: form.phone,
+    company: form.company || "Individual",
+    subject: form.inquiryType,
+    messageBody: form.message
   };
+
+  try {
+    // 1. Capture the backend response
+    const response = await api.sendContactForm(payload);
+    
+    // 2. Use the message returned by the API
+    toast({ 
+      title: "Success!", 
+      description: response.message || "Your message has been received." 
+    });
+    
+    setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" });
+  } catch (error) {
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: error instanceof Error ? error.message : "Something went wrong.",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <main className="pt-20">
