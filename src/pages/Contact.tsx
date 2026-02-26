@@ -3,17 +3,56 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Loader2 } from "lucide-react"; 
 import { useToast } from "@/hooks/use-toast";
+import { api } from "@/lib/api"; 
 
-const Contact = () => {
+function Contact() {
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: "", email: "", phone: "", inquiryType: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Local state for the form (UI-friendly)
+  const [form, setForm] = useState({ 
+    fullName: "", 
+    email: "", 
+    phone: "", 
+    company: "", // Added company to state
+    inquiryType: "", 
+    message: "" 
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message Sent!", description: "We'll get back to you within 24 hours." });
-    setForm({ name: "", email: "", phone: "", inquiryType: "", message: "" });
+    setIsSubmitting(true);
+
+    // Split Full Name into First and Last for the backend
+    const nameParts = form.fullName.trim().split(" ");
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || "N/A";
+
+    try {
+      await api.sendContactForm({
+        id: 0,
+        firstName,
+        lastName,
+        email: form.email,
+        phoneNumber: form.phone,
+        company: form.company || "Individual",
+        subject: form.inquiryType,
+        messageBody: form.message
+      });
+
+      toast({ title: "Message Sent!", description: "We'll get back to you within 24 hours." });
+      setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Something went wrong.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -32,33 +71,19 @@ const Contact = () => {
 
       <section className="section-padding bg-background">
         <div className="container-wide">
-          <div className="grid md:grid-cols-5 gap-12">
+          <div className="grid md:grid-cols-5 gap-12 items-center">
             {/* Contact Info */}
             <div className="md:col-span-2 space-y-8">
               <div>
-                <h2 className="font-display text-2xl font-bold text-foreground mb-6">
-                  Reach Us
-                </h2>
-
+                <h2 className="font-display text-2xl font-bold text-foreground mb-6">Reach Us</h2>
                 <div className="space-y-6">
-
-                  {/* Head Office */}
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=5901+Peachtree+Dunwoody+Road+Suite+A310+Atlanta+GA+30328+USA"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
-                  >
+                  <a href="#" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">
-                        Head Office
-                      </h3>
-                      <p className="font-body text-sm text-muted-foreground">
-                        5901 Peachtree Dunwoody Road, Suite A310, Atlanta, GA 30328, USA
-                      </p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">Head Office</h3>
+                      <p className="font-body text-sm text-muted-foreground">5901 Peachtree Dunwoody Road, Suite A310, Atlanta, GA 30328, USA</p>
                     </div>
                   </a>
 
@@ -82,62 +107,24 @@ const Contact = () => {
                     </div>
                   </a>
 
-                  {/* Phone */}
-                  <a
-                    href="tel:+2348026133205"
-                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
-                  >
+                  <a href="tel:+2348026133205" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Phone className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">
-                        Phone
-                      </h3>
-                      <p className="font-body text-sm text-muted-foreground">
-                        +234 802 613 3205
-                      </p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">Phone</h3>
+                      <p className="font-body text-sm text-muted-foreground">+234 802 613 3205</p>
                     </div>
                   </a>
-
-                  {/* Email */}
-                  <a
-                    href="mailto:info@agroallied.com?subject=Business Inquiry"
-                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
-                  >
+                  <a href="mailto:info@agroallied.com" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Mail className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">
-                        Email
-                      </h3>
-                      <p className="font-body text-sm text-muted-foreground">
-                        info@agroallied.com
-                      </p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">Email</h3>
+                      <p className="font-body text-sm text-muted-foreground">info@agroallied.com</p>
                     </div>
                   </a>
-
-                  {/* WhatsApp */}
-                  <a
-                    href="https://wa.me/2348026133205"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
-                  >
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <MessageCircle className="w-5 h-5 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">
-                        WhatsApp
-                      </h3>
-                      <p className="font-body text-sm text-muted-foreground">
-                        +234 802 613 3205
-                      </p>
-                    </div>
-                  </a>
-
                 </div>
               </div>
 
@@ -166,10 +153,10 @@ const Contact = () => {
                       <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Full Name</label>
                       <Input
                         required
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        disabled={isSubmitting}
+                        value={form.fullName}
+                        onChange={(e) => setForm({ ...form, fullName: e.target.value })}
                         placeholder="Your name"
-                        maxLength={100}
                       />
                     </div>
                     <div>
@@ -177,10 +164,10 @@ const Contact = () => {
                       <Input
                         required
                         type="email"
+                        disabled={isSubmitting}
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder="you@example.com"
-                        maxLength={255}
                       />
                     </div>
                   </div>
@@ -188,40 +175,57 @@ const Contact = () => {
                     <div>
                       <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Phone</label>
                       <Input
+                        disabled={isSubmitting}
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         placeholder="+234..."
-                        maxLength={20}
                       />
                     </div>
                     <div>
-                      <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Inquiry Type</label>
-                      <Select value={form.inquiryType} onValueChange={(v) => setForm({ ...form, inquiryType: v })}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="partnership">Partnership</SelectItem>
-                          <SelectItem value="bulk-purchase">Bulk Purchase</SelectItem>
-                          <SelectItem value="export">Export Inquiry</SelectItem>
-                          <SelectItem value="general">General Inquiry</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Company</label>
+                      <Input
+                        disabled={isSubmitting}
+                        value={form.company}
+                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                        placeholder="Company name"
+                      />
                     </div>
+                  </div>
+                  <div>
+                    <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Inquiry Type</label>
+                    <Select 
+                      disabled={isSubmitting}
+                      value={form.inquiryType} 
+                      onValueChange={(v) => setForm({ ...form, inquiryType: v })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Partnership">Partnership</SelectItem>
+                        <SelectItem value="Bulk Purchase">Bulk Purchase</SelectItem>
+                        <SelectItem value="Export Inquiry">Export Inquiry</SelectItem>
+                        <SelectItem value="General Inquiry">General Inquiry</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
                     <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Message</label>
                     <Textarea
                       required
+                      disabled={isSubmitting}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Tell us about your needs..."
                       rows={5}
-                      maxLength={1000}
                     />
                   </div>
-                  <Button type="submit" variant="gold" size="lg" className="w-full">
-                    Send Message
+                  <Button type="submit" variant="gold" size="lg" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</>
+                    ) : (
+                      "Send Message"
+                    )}
                   </Button>
                 </form>
               </div>
