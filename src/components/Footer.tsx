@@ -69,6 +69,18 @@ const Footer = () => {
                 </span>
               </a>
 
+              <a
+                href="https://www.google.com/maps?q=Apt.%20B%20Imanium%20Estate,%20Nathaniel%20Akpan%20Street,%20Off%20Ekpri%20Nsukara,%20Uyo,%20Akwa%20Ibom%20State"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 hover:text-gold transition-colors"
+              >
+                <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+                <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
+                  Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara. Uyo. Akwa Ibom State.
+                </span>
+              </a>
+
               {/* Phone */}
               <a
                 href="tel:+2348026133205"

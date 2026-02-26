@@ -36,58 +36,122 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="md:col-span-2 space-y-8">
               <div>
-                <h2 className="font-display text-2xl font-bold text-foreground mb-6">Reach Us</h2>
+                <h2 className="font-display text-2xl font-bold text-foreground mb-6">
+                  Reach Us
+                </h2>
+
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4">
+
+                  {/* Head Office */}
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=5901+Peachtree+Dunwoody+Road+Suite+A310+Atlanta+GA+30328+USA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
+                  >
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">Branch Office</h3>
-                      <p className="font-body text-sm text-muted-foreground">Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara. Uyo. Akwa Ibom State.</p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">
+                        Head Office
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground">
+                        5901 Peachtree Dunwoody Road, Suite A310, Atlanta, GA 30328, USA
+                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
+                  </a>
+
+                  {/* Branch Office */}
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Apt+B+Imanium+Estate+Nathaniel+Akpan+Street+Off+Ekpri+Nsukara+Uyo+Akwa+Ibom+State+Nigeria"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <MapPin className="w-5 h-5 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-body text-sm font-semibold text-foreground">
+                        Branch Office
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground">
+                        Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara, Uyo, Akwa Ibom State, Nigeria
+                      </p>
+                    </div>
+                  </a>
+
+                  {/* Phone */}
+                  <a
+                    href="tel:+2348026133205"
+                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
+                  >
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Phone className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">Phone</h3>
-                      <p className="font-body text-sm text-muted-foreground">+2348026133205</p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">
+                        Phone
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground">
+                        +234 802 613 3205
+                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
+                  </a>
+
+                  {/* Email */}
+                  <a
+                    href="mailto:info@agroallied.com?subject=Business Inquiry"
+                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
+                  >
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Mail className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">Email</h3>
-                      <p className="font-body text-sm text-muted-foreground">info@agroallied.com</p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">
+                        Email
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground">
+                        info@agroallied.com
+                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
+                  </a>
+
+                  {/* WhatsApp */}
+                  <a
+                    href="https://wa.me/2348026133205"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
+                  >
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <MessageCircle className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-foreground">WhatsApp</h3>
-                      <p className="font-body text-sm text-muted-foreground">+2348026133205</p>
+                      <h3 className="font-body text-sm font-semibold text-foreground">
+                        WhatsApp
+                      </h3>
+                      <p className="font-body text-sm text-muted-foreground">
+                        +234 802 613 3205
+                      </p>
                     </div>
-                  </div>
+                  </a>
+
                 </div>
               </div>
 
-              {/* Map placeholder */}
+              {/* Google Map Embed (Head Office - Atlanta) */}
               <div className="rounded-xl overflow-hidden border border-border h-48 bg-muted flex items-center justify-center">
                 <iframe
-                  title="Office Location"
+                  title="Head Office Location"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps?q=Apt.%20B%20Imanium%20Estate,%20Nathaniel%20Akpan%20Street,%20Off%20Ekpri%20Nsukara,%20Uyo,%20Akwa%20Ibom%20State&output=embed"
+                  src="https://www.google.com/maps?q=5901%20Peachtree%20Dunwoody%20Road,%20Suite%20A310,%20Atlanta,%20GA%2030328,%20USA&output=embed"
                 />
               </div>
             </div>
