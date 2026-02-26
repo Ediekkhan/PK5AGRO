@@ -45,7 +45,7 @@ function Contact() {
     // 2. Use the message returned by the API
     toast({ 
       title: "Success!", 
-      description: response.message || "Your message has been received." 
+      description: response.responseMessage || "Your message has been received." 
     });
     
     setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" });
