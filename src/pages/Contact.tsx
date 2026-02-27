@@ -3,64 +3,62 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Mail, Phone, MapPin, MessageCircle, Loader2 } from "lucide-react"; 
+import { Mail, Phone, MapPin, MessageCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { api } from "@/lib/api"; 
+import { api } from "@/lib/api";
 
 function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // Local state for the form (UI-friendly)
-  const [form, setForm] = useState({ 
-    fullName: "", 
-    email: "", 
-    phone: "", 
-    company: "", // Added company to state
-    inquiryType: "", 
-    message: "" ,
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    company: "",
+    inquiryType: "",
+    message: "",
     appId: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  // Name splitting logic remains the same...
-  const [fName, ...lNameParts] = form.fullName.trim().split(" ");
-  const payload = {
-    id: 0,
-    firstName: fName || "",
-    lastName: lNameParts.join(" ") || "N/A",
-    email: form.email,
-    phoneNumber: form.phone,
-    company: form.company || "Individual",
-    subject: form.inquiryType,
-    appId: "com.pk5.agro",
-    messageBody: form.message
+    // Name splitting logic remains the same...
+    const [fName, ...lNameParts] = form.fullName.trim().split(" ");
+    const payload = {
+      id: 0,
+      firstName: fName || "",
+      lastName: lNameParts.join(" ") || "N/A",
+      email: form.email,
+      phoneNumber: form.phone,
+      company: form.company || "Individual",
+      subject: form.inquiryType,
+      appId: "com.pk5.agro",
+      messageBody: form.message
+    };
+
+    try {
+      const response = await api.sendContactForm(payload);
+
+      toast({
+        title: "Success!",
+        description: response.responseMessage || "Your message has been received."
+      });
+
+      setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "", appId: form.appId });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Something went wrong.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
-  try {
-    // 1. Capture the backend response
-    const response = await api.sendContactForm(payload);
-    
-    // 2. Use the message returned by the API
-    toast({ 
-      title: "Success!", 
-      description: response.responseMessage || "Your message has been received." 
-    });
-    
-    setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "" , appId:form.appId});
-  } catch (error) {
-    toast({
-      variant: "destructive",
-      title: "Error",
-      description: error instanceof Error ? error.message : "Something went wrong.",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
 
   return (
     <main className="pt-20">
@@ -84,7 +82,9 @@ function Contact() {
               <div>
                 <h2 className="font-display text-2xl font-bold text-foreground mb-6">Reach Us</h2>
                 <div className="space-y-6">
-                  <a href="#" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
+                  <a href="https://www.google.com/maps?q=5901%20Peachtree%20Dunwoody%20Road,%20Suite%20A310,%20Atlanta,%20GA%2030328,%20USA"
+                    target="_blank"
+                    rel="noopener noreferrer" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5 text-accent" />
                     </div>
@@ -200,9 +200,9 @@ function Contact() {
                   </div>
                   <div>
                     <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Inquiry Type</label>
-                    <Select 
+                    <Select
                       disabled={isSubmitting}
-                      value={form.inquiryType} 
+                      value={form.inquiryType}
                       onValueChange={(v) => setForm({ ...form, inquiryType: v })}
                     >
                       <SelectTrigger>

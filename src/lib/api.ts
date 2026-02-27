@@ -9,7 +9,7 @@ export interface ContactBackendRequest {
   messageBody: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "https://api.yourbackend.com";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export const api = {
   sendContactForm: async (data: ContactBackendRequest) => {
@@ -26,8 +26,7 @@ export const api = {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.message || "Failed to send message");
     }
-    
-    // return response.json();
+
     return result;
   },
 };
