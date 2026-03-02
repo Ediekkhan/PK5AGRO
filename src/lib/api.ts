@@ -13,7 +13,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export const api = {
   sendContactForm: async (data: ContactBackendRequest) => {
-    const response = await fetch(`${API_BASE_URL}/api/ContactUs/contact-us`, {
+    const response = await fetch(`${API_BASE_URL}/api/ContactUs/agro-contact-us`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
