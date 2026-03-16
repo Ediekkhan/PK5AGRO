@@ -12,7 +12,7 @@ const Footer = () => {
               PK5<span className="text-gold"> Agro-Allied</span>
             </h3>
             <p className="font-body text-primary-foreground/60 text-sm leading-relaxed">
-              Cultivating excellence across the agricultural landscape since 2021
+              Cultivating excellence across the agricultural landscape since 2021.
             </p>
           </div>
 
