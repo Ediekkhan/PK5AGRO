@@ -9,10 +9,10 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <h3 className="font-display text-2xl font-bold mb-4">
-              PK5<span className="text-gold"> Agro</span>
+              PK5<span className="text-gold"> Agro-Allied</span>
             </h3>
             <p className="font-body text-primary-foreground/60 text-sm leading-relaxed">
-              Cultivating excellence across Nigeria's agricultural landscape since 2025.
+              Cultivating excellence across the agricultural landscape since 2021.
             </p>
           </div>
 
@@ -36,7 +36,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-semibold mb-4 text-gold">Products</h4>
             <div className="flex flex-col gap-2">
-              {["Palm Kernel", "Cocoa", "plantains"].map((item) => (
+              {["Palm Kernel", "Cocoa", "Plantain"].map((item) => (
                 <Link
                   key={item}
                   to="/products"
@@ -70,36 +70,36 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://www.google.com/maps?q=Apt.%20B%20Imanium%20Estate,%20Nathaniel%20Akpan%20Street,%20Off%20Ekpri%20Nsukara,%20Uyo,%20Akwa%20Ibom%20State"
+                href="https://www.google.com/maps/search/?api=1&query=2%2F5%2C+Nza+Street%2C+Independence+Layout+Enugu%2C+Enugu+State%2C+Nigeria"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 hover:text-gold transition-colors"
               >
                 <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
-                  Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara. Uyo. Akwa Ibom State.
+                  2/5, Nza Street, Independence Layout Enugu, Enugu State, Nigeria
                 </span>
               </a>
 
               {/* Phone */}
               <a
-                href="tel:+2348026133205"
+                href="tel:+14044365533"
                 className="flex items-center gap-3 hover:text-gold transition-colors"
               >
                 <Phone className="w-4 h-4 text-gold shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
-                  +2348026133205
+                  +1 (404) 436-5533               
                 </span>
               </a>
 
               {/* Email */}
               <a
-                href="mailto:info@agroallied.com"
+                href="mailto:Info@pk5agroallied.com"
                 className="flex items-center gap-3 hover:text-gold transition-colors"
               >
                 <Mail className="w-4 h-4 text-gold shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
-                  info@agroallied.com
+                  Info@pk5agroallied.com
                 </span>
               </a>
 
@@ -107,15 +107,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
           <p className="font-body text-xs text-primary-foreground/40">
-            © 2025 PK5 Agro Allied. All rights reserved.
+            ©{new Date().getFullYear()} PK5 Agro-Allied. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          {/* <div className="flex gap-6">
             <span className="font-body text-xs text-primary-foreground/40">NAFDAC Certified</span>
             <span className="font-body text-xs text-primary-foreground/40">SON Approved</span>
             <span className="font-body text-xs text-primary-foreground/40">Export Licensed</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

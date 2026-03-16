@@ -14,8 +14,7 @@ const About = () => {
             Our Story
           </h1>
           <p className="font-body text-primary-foreground/70 text-lg leading-relaxed">
-            PK5 Agro Allied was founded with a single vision: to harness Nigeria's vast
-            agricultural potential and deliver world-class products to local and international markets.
+            PK5 Agro-Allied was founded with a single vision: to harness vast agricultural potential and deliver world-class products to local and international markets.
           </p>
         </div>
       </section>
@@ -75,9 +74,9 @@ const About = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { name: "Prince Nnaemeka Njoku", role: "CEO & Founder", image: princeImg },
-              { name: "Peter Eziakor", role: "Head of Facilities & Production", image: peterImg},
-              { name: "Alozie Okwukanma", role: "Head of IT", image: alozieImg},
+              { name: "Prince  Njoku", role: "CEO & Founder", image: princeImg },
+              { name: "Peter Eziakor", role: "Director of Corporate Affairs", image: peterImg},
+              { name: "Alozie Okwukanma", role: "Director of ICT", image: alozieImg},
             ].map((person) => (
               <div key={person.name} className="p-6 rounded-lg bg-card shadow-sm border border-border">
                 <div className="w-20 h-24 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">

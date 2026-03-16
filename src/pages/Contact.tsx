@@ -96,7 +96,7 @@ function Contact() {
 
                   {/* Branch Office */}
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Apt+B+Imanium+Estate+Nathaniel+Akpan+Street+Off+Ekpri+Nsukara+Uyo+Akwa+Ibom+State+Nigeria"
+                    href="https://www.google.com/maps/search/?api=1&query=2%2F5%2C+Nza+Street%2C+Independence+Layout+Enugu%2C+Enugu+State%2C+Nigeria"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition"
@@ -109,7 +109,7 @@ function Contact() {
                         Branch Office
                       </h3>
                       <p className="font-body text-sm text-muted-foreground">
-                        Apt. B Imanium Estate, Nathaniel Akpan Street, Off Ekpri Nsukara, Uyo, Akwa Ibom State, Nigeria
+                       2/5, Nza Street, Independence Layout Enugu, Enugu State, Nigeria
                       </p>
                     </div>
                   </a>
@@ -120,16 +120,16 @@ function Contact() {
                     </div>
                     <div>
                       <h3 className="font-body text-sm font-semibold text-foreground">Phone</h3>
-                      <p className="font-body text-sm text-muted-foreground">+234 802 613 3205</p>
+                      <p className="font-body text-sm text-muted-foreground">+1 (404) 436-5533</p>
                     </div>
                   </a>
-                  <a href="mailto:info@agroallied.com" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
+                  <a href="mailto:Info@pk5agroallied.com" className="flex items-start gap-4 hover:bg-muted/40 p-2 rounded-lg transition">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Mail className="w-5 h-5 text-accent" />
                     </div>
                     <div>
                       <h3 className="font-body text-sm font-semibold text-foreground">Email</h3>
-                      <p className="font-body text-sm text-muted-foreground">info@agroallied.com</p>
+                      <p className="font-body text-sm text-muted-foreground">Info@pk5agroallied.com</p>
                     </div>
                   </a>
                 </div>
@@ -185,7 +185,7 @@ function Contact() {
                         disabled={isSubmitting}
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        placeholder="+234..."
+                        placeholder="e.g +1404..... "
                       />
                     </div>
                     <div>

@@ -25,7 +25,7 @@ const productData = [
     image: cocoaImg,
     tagline: "Premium Beans for a Global Palate",
     description:
-      "Our cocoa beans are carefully fermented, sun-dried, and sorted to meet the highest international export standards. Sourced from farms in Nigeria's cocoa belt, every batch delivers rich flavor and premium quality.",
+      "Our cocoa beans are carefully fermented, sun-dried, and sorted to meet the highest international export standards. Sourced from the heart of the regional cocoa belt, every batch delivers rich flavor and premium quality.",
     specs: [
       "Bean Count: 90-100 per 100g",
       "Moisture: < 7.5%",

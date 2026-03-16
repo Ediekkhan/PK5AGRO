@@ -18,7 +18,7 @@ const products = [
   },
   {
     title: "Plantain",
-    description: "Fresh plantain and processed plantain products sourced from our sustainable farms across Nigeria.",
+    description: "Fresh plantain and processed plantain products sourced from our sustainable farms across the globe.",
     image: plantainImg,
     link: "/products#plantain",
   },
