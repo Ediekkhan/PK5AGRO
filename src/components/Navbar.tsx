@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+// import logo from '../assets/pk5agro.jpeg'
 import logo from '../assets/PK5 Agro-allied logo.png'
 
 const navLinks = [

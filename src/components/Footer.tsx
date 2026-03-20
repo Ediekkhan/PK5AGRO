@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
+  const socialLinks = [
+    { icon: Linkedin, label: "LinkedIn", url: "https://www.linkedin.com/company/pk5-agro-allied", color: "hover:text-[#0A66C2]" },
+    { icon: Facebook, label: "Facebook", url: "https://www.facebook.com/#", color: "hover:text-[#1877F2]" },
+    { icon: Twitter, label: "X (Twitter)", url: "https://twitter.com/#", color: "hover:text-[#000000]" },
+    { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/#", color: "hover:text-[#E4405F]" },
+  ];
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container-wide section-padding pb-8">
@@ -88,7 +95,7 @@ const Footer = () => {
               >
                 <Phone className="w-4 h-4 text-gold shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
-                  +1 (404) 436-5533               
+                  +1 (404) 436-5533
                 </span>
               </a>
 
@@ -107,15 +114,36 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-          <p className="font-body text-xs text-primary-foreground/40">
-            ©{new Date().getFullYear()} PK5 Agro-Allied. All rights reserved.
-          </p>
+        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+
           {/* <div className="flex gap-6">
             <span className="font-body text-xs text-primary-foreground/40">NAFDAC Certified</span>
             <span className="font-body text-xs text-primary-foreground/40">SON Approved</span>
             <span className="font-body text-xs text-primary-foreground/40">Export Licensed</span>
           </div> */}
+
+          {/* Social Media Links */}
+          <div className=" border-primary-foreground/10">
+            <div className="flex gap-4">
+              {socialLinks.map(({ icon: Icon, label, url, color }) => (
+                <a
+                  key={label}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className={`transition-colors ${color}`}
+                  title={label}
+                >
+                  <Icon className="w-5 h-5 text-primary-foreground/60 hover:text-gold" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <p className="font-body text-xs text-primary-foreground/40">
+            ©{new Date().getFullYear()} PK5 Agro-Allied. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
