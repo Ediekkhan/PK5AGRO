@@ -4,9 +4,9 @@ import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram } from "luc
 const Footer = () => {
   const socialLinks = [
     { icon: Linkedin, label: "LinkedIn", url: "https://www.linkedin.com/company/pk5-agro-allied", color: "hover:text-[#0A66C2]" },
-    { icon: Facebook, label: "Facebook", url: "https://www.facebook.com/#", color: "hover:text-[#1877F2]" },
-    { icon: Twitter, label: "X (Twitter)", url: "https://twitter.com/#", color: "hover:text-[#000000]" },
-    { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/#", color: "hover:text-[#E4405F]" },
+    { icon: Facebook, label: "Facebook", url: "https://web.facebook.com/profile.php?id=61588136807800", color: "hover:text-[#1877F2]" },
+    { icon: Twitter, label: "X (Twitter)", url: "https://x.com/PK5AgroAllied", color: "hover:text-[#000000]" },
+    { icon: Instagram, label: "Instagram", url: "https://www.instagram.com/pk5agroallied/", color: "hover:text-[#E4405F]" },
   ];
 
   return (
@@ -115,13 +115,6 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-
-          {/* <div className="flex gap-6">
-            <span className="font-body text-xs text-primary-foreground/40">NAFDAC Certified</span>
-            <span className="font-body text-xs text-primary-foreground/40">SON Approved</span>
-            <span className="font-body text-xs text-primary-foreground/40">Export Licensed</span>
-          </div> */}
-
           {/* Social Media Links */}
           <div className=" border-primary-foreground/10">
             <div className="flex gap-4">
@@ -144,6 +137,12 @@ const Footer = () => {
           <p className="font-body text-xs text-primary-foreground/40">
             ©{new Date().getFullYear()} PK5 Agro-Allied. All rights reserved.
           </p>
+
+          {/* <div className="flex gap-6">
+            <span className="font-body text-xs text-primary-foreground/40">NAFDAC Certified</span>
+            <span className="font-body text-xs text-primary-foreground/40">SON Approved</span>
+            <span className="font-body text-xs text-primary-foreground/40">Export Licensed</span>
+          </div> */}
         </div>
       </div>
     </footer>
