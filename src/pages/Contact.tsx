@@ -75,10 +75,10 @@ function Contact() {
       </section>
 
       <section className="section-padding bg-background">
-        <div className="container-wide">
+        <div className="container-wide flex flex-col gap-12">
           <div className="grid md:grid-cols-5 gap-12 items-center">
             {/* Contact Info */}
-            <div className="md:col-span-2 space-y-8">
+            <div className="md:col-span-2 space-y-8 h-full">
               <div>
                 <h2 className="font-display text-2xl font-bold text-foreground mb-6">Reach Us</h2>
                 <div className="space-y-6">
@@ -109,7 +109,7 @@ function Contact() {
                         Branch Office
                       </h3>
                       <p className="font-body text-sm text-muted-foreground">
-                       2/5, Nza Street, Independence Layout Enugu, Enugu State, Nigeria
+                        2/5, Nza Street, Independence Layout Enugu, Enugu State, Nigeria
                       </p>
                     </div>
                   </a>
@@ -133,20 +133,6 @@ function Contact() {
                     </div>
                   </a>
                 </div>
-              </div>
-
-              {/* Google Map Embed (Head Office - Atlanta) */}
-              <div className="rounded-xl overflow-hidden border border-border h-48 bg-muted flex items-center justify-center">
-                <iframe
-                  title="Head Office Location"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps?q=5901%20Peachtree%20Dunwoody%20Road,%20Suite%20A310,%20Atlanta,%20GA%2030328,%20USA&output=embed"
-                />
               </div>
             </div>
 
@@ -238,6 +224,21 @@ function Contact() {
               </div>
             </div>
           </div>
+
+          {/* Google Map Embed (Head Office - Atlanta) */}
+          <div className="rounded-xl overflow-hidden border border-border h-96 bg-muted flex items-center justify-center">
+            <iframe
+              title="Head Office Location"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=5901%20Peachtree%20Dunwoody%20Road,%20Suite%20A310,%20Atlanta,%20GA%2030328,%20USA&output=embed"
+            />
+          </div>
+
         </div>
       </section>
     </main>
