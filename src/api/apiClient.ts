@@ -8,14 +8,21 @@ const apiClient = axios.create({
   },
 });
 
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    requiresApiKey?: boolean;
+  }
+}
+
 // Request Interceptor: Inject API Key automatically
 apiClient.interceptors.request.use((config) => {
   const keyName = import.meta.env.VITE_API_KEY_NAME;
   const keyValue = import.meta.env.VITE_API_KEY_VALUE;
   
-  if (keyName && keyValue) {
+  if (config.requiresApiKey && keyName) {
     config.headers[keyName] = keyValue;
   }
+
   return config;
 });
 
