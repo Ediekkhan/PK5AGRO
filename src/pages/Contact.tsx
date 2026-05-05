@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin, MessageCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { api } from "@/lib/api";
+import { contactService } from "@/api/contactService";
 
 function Contact() {
   const { toast } = useToast();
@@ -41,11 +41,11 @@ function Contact() {
     };
 
     try {
-      const response = await api.sendContactForm(payload);
+      const response = await contactService.sendContactForm(payload);
 
       toast({
         title: "Success!",
-        description: response.responseMessage || "Your message has been received."
+        description: response.data || "Your message has been received."
       });
 
       setForm({ fullName: "", email: "", phone: "", company: "", inquiryType: "", message: "", appId: form.appId });
