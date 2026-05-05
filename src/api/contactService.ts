@@ -13,7 +13,7 @@ export interface ContactBackendRequest {
 
 export const contactService = {
   sendContactForm: async (data: ContactBackendRequest) => {
-    return apiClient.post('/api/ContactUs/agro-contact-us', data);
+    return apiClient.post('/api/ContactUs/agro-contact-us', data, { requiresApiKey: true });
   },
   
 };
