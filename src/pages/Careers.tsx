@@ -33,30 +33,31 @@ const talentSchema = z.object({
 });
 
 const Careers = () => {
-   const { toast } = useToast();
+  const { toast } = useToast();
   const [talent, setTalent] = useState({ name: "", email: "", area: "" });
-  const [jobs, setJobs] = useState([])
+  const [jobs, setJobs] = useState<any[]>([]);
   const [filter, setFilter] = useState<string>("All");
   const [query, setQuery] = useState<string>("");
- 
+
   useEffect(() => {
-  const fetchJobs = async () => {
-    try {
-      const response = await careerService.getJobs();
-      const data: any[] = response.responseData as any
-     setJobs(data)
-    } catch (error) {
-       toast({
-        variant: "destructive",
-        title: "Error",
-        description: error instanceof Error ? error.message : "Something went wrong.",
-      });
- 
-    }
-  };
- 
-  fetchJobs();
-}, []);
+    const fetchJobs = async () => {
+      try {
+        const response  = await careerService.getJobs();
+        const data: any[] = response?.responseData as any[] ;
+
+        setJobs(data);
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error instanceof Error ? error.message : "Something went wrong.",
+        });
+
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   const filtered = jobs.filter((j) => {
     const matchDept = filter === "All" || j.department === filter;
@@ -65,22 +66,23 @@ const Careers = () => {
       !q ||
       j.title.toLowerCase().includes(q) ||
       j.department.toLowerCase().includes(q) ||
-      j.location.toLowerCase().includes(q) 
+      j.location.toLowerCase().includes(q)
     return matchDept && matchQuery;
   });
-   
-const departments = useMemo(() => {
+
+  const departments = useMemo(() => {
     const map = new Map(
       jobs
         .map((job) => job.department)
         .filter(Boolean)
         .map((d) => [d!.toLowerCase(), d]),
     );
- 
+
     return [...map.values()]
       .map(toTitleCase)
       .sort((a, b) => a.localeCompare(b));
   }, [jobs]);
+
   return (
     <main className="bg-background">
       {/* Hero */}
@@ -185,11 +187,10 @@ const departments = useMemo(() => {
               <button
                 key={d}
                 onClick={() => setFilter(d)}
-                className={`px-4 py-2 rounded-full text-xs font-body font-medium tracking-wide border transition-colors ${
-                  filter === d
-                    ? "bg-forest text-primary-foreground border-forest"
-                    : "bg-transparent text-muted-foreground border-border hover:border-forest hover:text-forest"
-                }`}
+                className={`px-4 py-2 rounded-full text-xs font-body font-medium tracking-wide border transition-colors ${filter === d
+                  ? "bg-forest text-primary-foreground border-forest"
+                  : "bg-transparent text-muted-foreground border-border hover:border-forest hover:text-forest"
+                  }`}
               >
                 {d}
               </button>
@@ -243,7 +244,7 @@ const departments = useMemo(() => {
               your profile and we will reach out as relevant opportunities open.
             </p>
           </div>
-          <form  className="bg-card text-foreground rounded-lg p-7 space-y-4 border border-border">
+          <form className="bg-card text-foreground rounded-lg p-7 space-y-4 border border-border">
             <div>
               <Label htmlFor="t-name" className="text-xs">Full Name</Label>
               <Input id="t-name" value={talent.name} onChange={(e) => setTalent({ ...talent, name: e.target.value })} maxLength={100} />
