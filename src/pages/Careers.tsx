@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Briefcase, Clock, TrendingUp, GraduationCap, Cpu, Leaf, Users2, Globe2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 import { z } from "zod";
-import { jobs } from "@/data/jobs";
+import { careerService } from "@/api/careerService";
+import { useToast } from "@/hooks/use-toast";
+import { toTitleCase } from "@/lib/utils";
 
 const valueProps = [
   { icon: Globe2, title: "Impact at Scale", desc: "Contribute to large-scale agro-processing operations shaping food systems across Africa." },
@@ -32,11 +33,31 @@ const talentSchema = z.object({
 });
 
 const Careers = () => {
+   const { toast } = useToast();
   const [talent, setTalent] = useState({ name: "", email: "", area: "" });
-
-  const departments = Array.from(new Set(jobs.map((j) => j.department)));
+  const [jobs, setJobs] = useState([])
   const [filter, setFilter] = useState<string>("All");
   const [query, setQuery] = useState<string>("");
+ 
+  useEffect(() => {
+  const fetchJobs = async () => {
+    try {
+      const response = await careerService.getJobs();
+      const data: any[] = response.responseData as any
+     setJobs(data)
+    } catch (error) {
+       toast({
+        variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Something went wrong.",
+      });
+ 
+    }
+  };
+ 
+  fetchJobs();
+}, []);
+
   const filtered = jobs.filter((j) => {
     const matchDept = filter === "All" || j.department === filter;
     const q = query.trim().toLowerCase();
@@ -44,23 +65,22 @@ const Careers = () => {
       !q ||
       j.title.toLowerCase().includes(q) ||
       j.department.toLowerCase().includes(q) ||
-      j.location.toLowerCase().includes(q) ||
-      j.overview.toLowerCase().includes(q) ||
-      j.responsibilities.some((r) => r.toLowerCase().includes(q)) ||
-      j.qualifications.some((r) => r.toLowerCase().includes(q));
+      j.location.toLowerCase().includes(q) 
     return matchDept && matchQuery;
   });
-  const submitTalent = (e: React.FormEvent) => {
-    e.preventDefault();
-    const parsed = talentSchema.safeParse(talent);
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0].message);
-      return;
-    }
-    toast.success("Welcome to the PK5 Talent Network. We will reach out as relevant roles open.");
-    setTalent({ name: "", email: "", area: "" });
-  };
-
+   
+const departments = useMemo(() => {
+    const map = new Map(
+      jobs
+        .map((job) => job.department)
+        .filter(Boolean)
+        .map((d) => [d!.toLowerCase(), d]),
+    );
+ 
+    return [...map.values()]
+      .map(toTitleCase)
+      .sort((a, b) => a.localeCompare(b));
+  }, [jobs]);
   return (
     <main className="bg-background">
       {/* Hero */}
@@ -195,7 +215,7 @@ const Careers = () => {
                   <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2 text-xs font-body text-muted-foreground">
                     <span className="inline-flex items-center gap-1.5"><Briefcase className="w-3.5 h-3.5" />{job.department}</span>
                     <span className="inline-flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" />{job.location}</span>
-                    <span className="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{job.type}</span>
+                    <span className="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{job.jobType}</span>
                   </div>
                 </div>
                 <Link to={`/careers/${job.id}`} target="_blank" rel="noopener noreferrer">
@@ -223,7 +243,7 @@ const Careers = () => {
               your profile and we will reach out as relevant opportunities open.
             </p>
           </div>
-          <form onSubmit={submitTalent} className="bg-card text-foreground rounded-lg p-7 space-y-4 border border-border">
+          <form  className="bg-card text-foreground rounded-lg p-7 space-y-4 border border-border">
             <div>
               <Label htmlFor="t-name" className="text-xs">Full Name</Label>
               <Input id="t-name" value={talent.name} onChange={(e) => setTalent({ ...talent, name: e.target.value })} maxLength={100} />
