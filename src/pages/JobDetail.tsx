@@ -20,7 +20,7 @@ const applicationSchema = z.object({
 const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  
+
   // Get job from passed state, fallback to static data
   const job = location.state?.job || jobs.find((j) => j.id === id);
   const [form, setForm] = useState({ name: "", email: "", phone: "", cover: "" });
@@ -63,14 +63,11 @@ const JobDetail = () => {
     }
     const allowed = [
       "application/pdf",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ];
     if (!allowed.includes(cv.type)) {
-      toast.error("CV must be PDF or Word document");
+      toast.error("CV must be PDF format");
       return;
-    }
-
+    }    
     setIsSubmitting(true);
     try {
       const formData = new FormData();
@@ -82,7 +79,7 @@ const JobDetail = () => {
       formData.append("cv", cv);
 
       await applicationService.submitApplication(job.id, formData);
-      
+
       toast.success("Your application has been received. Our team will review and contact qualified candidates.");
       setForm({ name: "", email: "", phone: "", cover: "" });
       setCv(null);
@@ -149,23 +146,23 @@ const JobDetail = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="name" className="text-sm font-semibold text-foreground mb-2 block">Full Name *</Label>
-                    <Input 
-                      id="name" 
+                    <Input
+                      id="name"
                       placeholder="John Doe"
-                      value={form.name} 
-                      onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
                       maxLength={100}
                       className="h-11"
                     />
                   </div>
                   <div>
                     <Label htmlFor="email" className="text-sm font-semibold text-foreground mb-2 block">Email Address *</Label>
-                    <Input 
-                      id="email" 
+                    <Input
+                      id="email"
                       type="email"
                       placeholder="john@example.com"
-                      value={form.email} 
-                      onChange={(e) => setForm({ ...form, email: e.target.value })} 
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
                       maxLength={255}
                       className="h-11"
                     />
@@ -176,20 +173,20 @@ const JobDetail = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="phone" className="text-sm font-semibold text-foreground mb-2 block">Phone Number *</Label>
-                    <Input 
+                    <Input
                       id="phone"
                       placeholder="+234 (0) 123 456 7890"
-                      value={form.phone} 
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })} 
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       maxLength={30}
                       className="h-11"
                     />
                   </div>
                   <div>
                     <Label className="text-sm font-semibold text-foreground mb-2 block">Position Applied For</Label>
-                    <Input 
-                      value={job.title} 
-                      readOnly 
+                    <Input
+                      value={job.title}
+                      readOnly
                       className="bg-background/60 h-11 cursor-default"
                     />
                   </div>
@@ -201,12 +198,12 @@ const JobDetail = () => {
                     <Label htmlFor="cover" className="text-sm font-semibold text-foreground">Cover Letter *</Label>
                     <span className="text-xs text-muted-foreground">{form.cover.length}/3000 characters</span>
                   </div>
-                  <Textarea 
-                    id="cover" 
+                  <Textarea
+                    id="cover"
                     placeholder="Tell us why you're interested in this role and what makes you a great fit. Share relevant experience and what excites you about PK5 Agro Allied."
                     rows={8}
-                    value={form.cover} 
-                    onChange={(e) => setForm({ ...form, cover: e.target.value })} 
+                    value={form.cover}
+                    onChange={(e) => setForm({ ...form, cover: e.target.value })}
                     maxLength={3000}
                     className="resize-none"
                   />
@@ -244,15 +241,15 @@ const JobDetail = () => {
                 </div>
 
                 {/* Submit Button */}
-                <Button 
-                  type="submit" 
-                  variant="gold" 
+                <Button
+                  type="submit"
+                  variant="gold"
                   className="w-full h-12 text-base font-semibold"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Submitting Application..." : "Submit Application"}
                 </Button>
-                
+
                 <p className="text-xs text-muted-foreground text-center">
                   By submitting, you agree to PK5 Agro Allied's terms and privacy policy
                 </p>

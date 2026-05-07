@@ -18,14 +18,6 @@ const valueProps = [
   { icon: GraduationCap, title: "Learning Environment", desc: "Cross-functional exposure across agronomy, processing, supply chain, and finance." },
 ];
 
-
-const applicationSchema = z.object({
-  name: z.string().trim().min(2, "Full name is required").max(100),
-  email: z.string().trim().email("Enter a valid email").max(255),
-  phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
-  cover: z.string().trim().min(50, "Please write at least 50 characters").max(3000),
-});
-
 const talentSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(255),
