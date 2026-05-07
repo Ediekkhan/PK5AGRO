@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, MapPin, Briefcase, Clock, Upload, Calendar } from "lucide-react";
+import { Link, useParams, useLocation } from "react-router-dom";
+import { ArrowLeft, MapPin, Briefcase, Clock, Upload, Calendar, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { z } from "zod";
 import { jobs } from "@/data/jobs";
+import { applicationService } from "@/api/applicationService";
 
 const applicationSchema = z.object({
   name: z.string().trim().min(2, "Full name is required").max(100),
@@ -18,9 +19,13 @@ const applicationSchema = z.object({
 
 const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const job = jobs.find((j) => j.id === id);
+  const location = useLocation();
+  
+  // Get job from passed state, fallback to static data
+  const job = location.state?.job || jobs.find((j) => j.id === id);
   const [form, setForm] = useState({ name: "", email: "", phone: "", cover: "" });
   const [cv, setCv] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,7 +46,7 @@ const JobDetail = () => {
     );
   }
 
-  const submitApplication = (e: React.FormEvent) => {
+  const submitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = applicationSchema.safeParse(form);
     if (!parsed.success) {
@@ -65,9 +70,27 @@ const JobDetail = () => {
       toast.error("CV must be PDF or Word document");
       return;
     }
-    toast.success("Your application has been received. Our team will review and contact qualified candidates.");
-    setForm({ name: "", email: "", phone: "", cover: "" });
-    setCv(null);
+
+    setIsSubmitting(true);
+    try {
+      const formData = new FormData();
+      formData.append("jobId", job.id.toString());
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("coverLetter", form.cover);
+      formData.append("cv", cv);
+
+      await applicationService.submitApplication(job.id, formData);
+      
+      toast.success("Your application has been received. Our team will review and contact qualified candidates.");
+      setForm({ name: "", email: "", phone: "", cover: "" });
+      setCv(null);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to submit application. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -86,9 +109,9 @@ const JobDetail = () => {
           <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 text-sm font-body text-primary-foreground/85">
             <span className="inline-flex items-center gap-1.5"><Briefcase className="w-4 h-4" />{job.department}</span>
             <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4" />{job.location}</span>
-            <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4" />{job.type}</span>
-            {job.deadline && (
-              <span className="inline-flex items-center gap-1.5"><Calendar className="w-4 h-4" />Apply by {job.deadline}</span>
+            <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4" />{job.jobType}</span>
+            {job.dT_Expiry && (
+              <span className="inline-flex items-center gap-1.5"><Calendar className="w-4 h-4" />Apply by {new Date(job.dT_Expiry).toLocaleDateString()}</span>
             )}
           </div>
         </div>
@@ -96,79 +119,120 @@ const JobDetail = () => {
 
       {/* Body */}
       <section className="section-padding">
-        <div className="container-wide grid lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-10">
+        <div className="container-wide">
+          <div className="prose prose-sm max-w-none mb-16">
             <div>
-              <h2 className="font-display text-sm uppercase tracking-wider text-gold mb-3">Role Overview</h2>
-              <p className="font-body text-muted-foreground leading-relaxed">{job.overview}</p>
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">About this role</h2>
+              <div className="font-body text-base text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: job.description }} />
             </div>
-            <div>
-              <h2 className="font-display text-sm uppercase tracking-wider text-gold mb-3">Key Responsibilities</h2>
-              <ul className="font-body text-muted-foreground space-y-2">
-                {job.responsibilities.map((r) => (
-                  <li key={r} className="flex gap-3">
-                    <span className="text-gold mt-2 w-1 h-1 rounded-full bg-gold shrink-0" />
-                    {r}
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-12">
+              <h2 className="font-display text-xl font-bold text-foreground mb-4">Experience Required</h2>
+              <p className="font-body text-base text-muted-foreground leading-relaxed">{job.experience}</p>
             </div>
-            <div className="grid sm:grid-cols-2 gap-8">
-              <div>
-                <h2 className="font-display text-sm uppercase tracking-wider text-gold mb-3">Qualifications</h2>
-                <ul className="font-body text-sm text-muted-foreground space-y-1.5">
-                  {job.qualifications.map((q) => <li key={q}>• {q}</li>)}
-                </ul>
-              </div>
-              <div>
-                <h2 className="font-display text-sm uppercase tracking-wider text-gold mb-3">Experience</h2>
-                <p className="font-body text-sm text-muted-foreground">{job.experience}</p>
-              </div>
-            </div>
-            {job.performance && (
-              <div>
-                <h2 className="font-display text-sm uppercase tracking-wider text-gold mb-3">Performance Expectations</h2>
-                <ul className="font-body text-sm text-muted-foreground space-y-1.5">
-                  {job.performance.map((p) => <li key={p}>• {p}</li>)}
-                </ul>
-              </div>
-            )}
           </div>
+        </div>
+      </section>
 
-          {/* Application Form */}
-          <div className="lg:col-span-1">
-            <div className="bg-muted/40 border border-border rounded-lg p-6 lg:sticky lg:top-28">
-              <h2 className="font-display text-xl font-semibold text-foreground mb-1">Apply for this role</h2>
-              <p className="font-body text-xs text-muted-foreground mb-5">All fields are required.</p>
-              <form onSubmit={submitApplication} className="space-y-4">
-                <div>
-                  <Label htmlFor="name" className="text-xs">Full Name</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} maxLength={100} />
+      {/* Application Section */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-wide">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-3">Ready to apply?</p>
+              <h2 className="font-display text-3xl font-bold text-foreground mb-3">Submit Your Application</h2>
+              <p className="font-body text-base text-muted-foreground">Tell us why you're the perfect fit for this role. We review applications on a rolling basis.</p>
+            </div>
+
+            <div className="bg-card border border-border rounded-lg p-8 md:p-10">
+              <form onSubmit={submitApplication} className="space-y-6">
+                {/* Row 1: Name and Email */}
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <Label htmlFor="name" className="text-sm font-semibold text-foreground mb-2 block">Full Name *</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="John Doe"
+                      value={form.name} 
+                      onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                      maxLength={100}
+                      className="h-11"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email" className="text-sm font-semibold text-foreground mb-2 block">Email Address *</Label>
+                    <Input 
+                      id="email" 
+                      type="email"
+                      placeholder="john@example.com"
+                      value={form.email} 
+                      onChange={(e) => setForm({ ...form, email: e.target.value })} 
+                      maxLength={255}
+                      className="h-11"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <Label htmlFor="email" className="text-xs">Email</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} maxLength={255} />
+
+                {/* Row 2: Phone and Position */}
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <Label htmlFor="phone" className="text-sm font-semibold text-foreground mb-2 block">Phone Number *</Label>
+                    <Input 
+                      id="phone"
+                      placeholder="+234 (0) 123 456 7890"
+                      value={form.phone} 
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })} 
+                      maxLength={30}
+                      className="h-11"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-sm font-semibold text-foreground mb-2 block">Position Applied For</Label>
+                    <Input 
+                      value={job.title} 
+                      readOnly 
+                      className="bg-background/60 h-11 cursor-default"
+                    />
+                  </div>
                 </div>
+
+                {/* Cover Letter */}
                 <div>
-                  <Label htmlFor="phone" className="text-xs">Phone</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} maxLength={30} />
+                  <div className="flex items-center justify-between mb-2">
+                    <Label htmlFor="cover" className="text-sm font-semibold text-foreground">Cover Letter *</Label>
+                    <span className="text-xs text-muted-foreground">{form.cover.length}/3000 characters</span>
+                  </div>
+                  <Textarea 
+                    id="cover" 
+                    placeholder="Tell us why you're interested in this role and what makes you a great fit. Share relevant experience and what excites you about PK5 Agro Allied."
+                    rows={8}
+                    value={form.cover} 
+                    onChange={(e) => setForm({ ...form, cover: e.target.value })} 
+                    maxLength={3000}
+                    className="resize-none"
+                  />
+                  <p className="text-xs text-muted-foreground mt-2">Minimum 50 characters required</p>
                 </div>
+
+                {/* File Upload */}
                 <div>
-                  <Label className="text-xs">Position</Label>
-                  <Input value={job.title} readOnly className="bg-background/60" />
-                </div>
-                <div>
-                  <Label htmlFor="cover" className="text-xs">Cover Letter</Label>
-                  <Textarea id="cover" rows={4} value={form.cover} onChange={(e) => setForm({ ...form, cover: e.target.value })} maxLength={3000} />
-                </div>
-                <div>
-                  <Label htmlFor="cv" className="text-xs">CV / Resume (PDF or Word, max 5MB)</Label>
+                  <Label htmlFor="cv" className="text-sm font-semibold text-foreground mb-3 block">Upload CV / Resume *</Label>
                   <label
                     htmlFor="cv"
-                    className="mt-1 flex items-center gap-2 px-3 py-2 border border-dashed border-border rounded-md cursor-pointer hover:border-gold transition-colors text-sm font-body text-muted-foreground"
+                    className="flex flex-col items-center justify-center gap-3 px-6 py-8 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-gold hover:bg-gold/5 transition-all duration-200"
                   >
-                    <Upload className="w-4 h-4" />
-                    <span className="truncate">{cv ? cv.name : "Choose file"}</span>
+                    <div className="flex flex-col items-center gap-2">
+                      <Upload className="w-8 h-8 text-gold" />
+                      <div className="text-center">
+                        <p className="font-semibold text-foreground">{cv ? "File selected" : "Click to upload"}</p>
+                        <p className="text-xs text-muted-foreground mt-1">PDF or Word document, max 5MB</p>
+                      </div>
+                    </div>
+                    {cv && (
+                      <div className="flex items-center gap-2 text-sm text-gold bg-gold/10 px-3 py-2 rounded-md w-full justify-center mt-2">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span className="truncate">{cv.name}</span>
+                      </div>
+                    )}
                   </label>
                   <input
                     id="cv"
@@ -178,7 +242,20 @@ const JobDetail = () => {
                     onChange={(e) => setCv(e.target.files?.[0] ?? null)}
                   />
                 </div>
-                <Button type="submit" variant="gold" className="w-full">Submit Application</Button>
+
+                {/* Submit Button */}
+                <Button 
+                  type="submit" 
+                  variant="gold" 
+                  className="w-full h-12 text-base font-semibold"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting Application..." : "Submit Application"}
+                </Button>
+                
+                <p className="text-xs text-muted-foreground text-center">
+                  By submitting, you agree to PK5 Agro Allied's terms and privacy policy
+                </p>
               </form>
             </div>
           </div>
