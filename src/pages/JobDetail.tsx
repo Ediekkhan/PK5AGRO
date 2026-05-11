@@ -122,24 +122,27 @@ const JobDetail = () => {
 
       {/* Body */}
       <section className="section-padding">
-        <div className="container-wide">
-          <div className="prose prose-sm max-w-none mb-16">
+        <div className="container-wide grid gap-12 xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1.5fr)]">
+          <div className="prose prose-sm max-w-none">
             <div>
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">About this role</h2>
-              <div className="font-body text-base text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: job.description }} />
+              <div className="font-body text-base text-muted-foreground  [&_p]:mb-4
+                    [&_ul]:mb-6 [&_ul]:pl-6 [&_ul]:list-disc
+                    [&_li]:mb-2
+                    [&_p>strong]:block
+                    [&_p>strong]:text-xl
+                    [&_p>strong]:font-semibold
+                    [&_p>strong]:text-gold
+                    [&_p>strong]:mb-3
+                    [&_p>strong]:mt-6 leading-relaxed" dangerouslySetInnerHTML={{ __html: job.description }} />
             </div>
             <div className="mt-12">
               <h2 className="font-display text-xl font-bold text-foreground mb-4">Experience Required</h2>
               <p className="font-body text-base text-muted-foreground leading-relaxed">{job.experience}</p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Application Section */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-wide">
-          <div className="max-w-3xl mx-auto">
+          <div className="space-y-6">
             <div className="text-center mb-10">
               <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-3">Ready to apply?</p>
               <h2 className="font-display text-3xl font-bold text-foreground mb-3">Submit Your Application</h2>
