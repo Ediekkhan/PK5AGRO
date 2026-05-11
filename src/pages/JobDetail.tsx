@@ -7,8 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { z } from "zod";
-import { jobs } from "@/data/jobs";
 import { applicationService } from "@/api/applicationService";
+import { careerService } from "@/api/careerService";
 
 const applicationSchema = z.object({
   name: z.string().trim().min(2, "Full name is required").max(100),
@@ -21,8 +21,8 @@ const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
 
-  // Get job from passed state, fallback to static data
-  const job = location.state?.job || jobs.find((j) => j.id === id);
+  const [job, setJob] = useState(location.state?.job || null);
+  const [loading, setLoading] = useState(!location.state?.job && !!id);
   const [form, setForm] = useState({ name: "", email: "", phone: "", cover: "" });
   const [cv, setCv] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,8 +31,39 @@ const JobDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (job) document.title = `${job.title} — Careers | PK5 Agro Allied`;
-  }, [job]);
+
+    const fetchJob = async () => {
+      if (!job && id) {
+        try {
+          setLoading(true);
+          const response = await careerService.getJob(id);
+          const jobData = response?.responseData;
+          if (jobData) {
+            setJob(jobData);
+            document.title = `${jobData.title} — Careers | PK5 Agro Allied`;
+          }
+        } catch (error) {
+          toast.error("Failed to load job details");
+        } finally {
+          setLoading(false);
+        }
+      } else if (job) {
+        document.title = `${job.title} — Careers | PK5 Agro Allied`;
+      }
+    };
+
+    fetchJob();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <main className="bg-background pt-32 pb-20">
+        <div className="container-wide text-center">
+          <p className="font-body text-muted-foreground">Loading job details...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!job) {
     return (
