@@ -26,6 +26,8 @@ const JobDetail = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", cover: "" });
   const [cv, setCv] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [showConsentError, setShowConsentError] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,6 +59,10 @@ const JobDetail = () => {
       toast.error("Please upload your CV/Resume");
       return;
     }
+    if (!consent) {
+      setShowConsentError(true);
+      return;
+    }
     if (cv.size > 5 * 1024 * 1024) {
       toast.error("CV must be under 5MB");
       return;
@@ -67,7 +73,7 @@ const JobDetail = () => {
     if (!allowed.includes(cv.type)) {
       toast.error("CV must be PDF format");
       return;
-    }    
+    }
     setIsSubmitting(true);
     try {
       const formData = new FormData();
@@ -244,15 +250,44 @@ const JobDetail = () => {
                 <Button
                   type="submit"
                   variant="gold"
-                  className="w-full h-12 text-base font-semibold"
-                  disabled={isSubmitting}
+                  className="w-full h-12 text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gold disabled:hover:text-accent-foreground disabled:pointer-events-auto"
+                  disabled={isSubmitting || !consent}
+                  aria-disabled={!consent}
                 >
                   {isSubmitting ? "Submitting Application..." : "Submit Application"}
                 </Button>
-
-                <p className="text-xs text-muted-foreground text-center">
-                  By submitting, you agree to PK5 Agro Allied's terms and privacy policy
-                </p>
+                <div className="pt-1">
+                  <label htmlFor="consent" className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      id="consent"
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        if (e.target.checked) setShowConsentError(false);
+                      }}
+                      className="mt-0.5 h-4 w-4 rounded border-border text-forest accent-forest focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 cursor-pointer"
+                      aria-describedby="consent-error"
+                      aria-required="true"
+                    />
+                    <span className="font-body text-xs text-muted-foreground leading-relaxed">
+                      By submitting, you agree to PK5 Agro-Allied's{" "}
+                      <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-forest underline underline-offset-2 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm">
+                        Terms of Service
+                      </Link>{" "}
+                      and{" "}
+                      <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-forest underline underline-offset-2 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm">
+                        Privacy Policy
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                  {showConsentError && !consent && (
+                    <p id="consent-error" role="alert" className="mt-2 font-body text-xs text-destructive">
+                      You must agree to the Terms of Service and Privacy Policy before submitting your application.
+                    </p>
+                  )}
+                </div>
               </form>
             </div>
           </div>
