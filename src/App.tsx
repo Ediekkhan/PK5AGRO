@@ -33,7 +33,7 @@ const App = () => (
           <Route path="/sustainability" element={<Sustainability />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers />} />
-          <Route path="/careers/job/:id" element={<JobDetail />} />
+          <Route path="/careers/job/:id/apply" element={<JobDetail />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />

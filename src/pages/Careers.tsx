@@ -211,7 +211,7 @@ const Careers = () => {
                     <span className="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{job.jobType}</span>
                   </div>
                 </div>
-                <Link to={`/careers/job/${job.id}`} state={{ job }}>
+                <Link to={`/careers/job/${job.id}/apply`} state={{ job }}>
                   <Button variant="gold" className="whitespace-nowrap">
                     Apply Now <ArrowRight className="w-4 h-4" />
                   </Button>
