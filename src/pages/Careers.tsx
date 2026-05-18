@@ -34,7 +34,7 @@ const Careers = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response  = await careerService.getJobs();
+        const response  = await careerService.getJobs("com.pk5.agro");
         const data: any[] = response?.responseData as any[] ;
 
         setJobs(data);
@@ -44,7 +44,6 @@ const Careers = () => {
           title: "Error",
           description: error instanceof Error ? error.message : "Something went wrong.",
         });
-
       }
     };
 
