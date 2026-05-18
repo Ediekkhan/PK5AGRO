@@ -11,7 +11,8 @@ import { applicationService } from "@/api/applicationService";
 import { careerService } from "@/api/careerService";
 
 const applicationSchema = z.object({
-  name: z.string().trim().min(2, "Full name is required").max(100),
+  firstName: z.string().trim().min(2, "First name is required").max(50),
+  lastName: z.string().trim().min(2, "Last name is required").max(50),
   email: z.string().trim().email("Enter a valid email").max(255),
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
   cover: z.string().trim().min(50, "Please write at least 50 characters").max(3000),
@@ -21,9 +22,9 @@ const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
 
-  const [job, setJob] = useState(location.state?.job || null);
+  const [job, setJob] = useState<any>(location.state?.job || null);
   const [loading, setLoading] = useState(!location.state?.job && !!id);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", cover: "" });
+  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", cover: "" });
   const [cv, setCv] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [consent, setConsent] = useState(false);
@@ -108,17 +109,18 @@ const JobDetail = () => {
     setIsSubmitting(true);
     try {
       const formData = new FormData();
-      formData.append("jobId", job.id.toString());
-      formData.append("name", form.name);
-      formData.append("email", form.email);
-      formData.append("phone", form.phone);
-      formData.append("coverLetter", form.cover);
-      formData.append("cv", cv);
+      formData.append("JobId", job.id.toString());
+      formData.append("FirstName", form.firstName);
+      formData.append("LastName", form.lastName);
+      formData.append("Email", form.email);
+      formData.append("PhoneNumber", form.phone);
+      formData.append("CoverLetter", form.cover);
+      formData.append("ResumeFile", cv);
 
       await applicationService.submitApplication(job.id, formData);
 
       toast.success("Your application has been received. Our team will review and contact qualified candidates.");
-      setForm({ name: "", email: "", phone: "", cover: "" });
+      setForm({ firstName: "", lastName: "", email: "", phone: "", cover: "" });
       setCv(null);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to submit application. Please try again.");
@@ -182,19 +184,34 @@ const JobDetail = () => {
 
             <div className="bg-card border border-border rounded-lg p-8 md:p-10">
               <form onSubmit={submitApplication} className="space-y-6">
-                {/* Row 1: Name and Email */}
+                {/* Row 1: First and Last Name */}
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="name" className="text-sm font-semibold text-foreground mb-2 block">Full Name *</Label>
+                    <Label htmlFor="firstName" className="text-sm font-semibold text-foreground mb-2 block">First Name *</Label>
                     <Input
-                      id="name"
-                      placeholder="John Doe"
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      maxLength={100}
+                      id="firstName"
+                      placeholder="John"
+                      value={form.firstName}
+                      onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                      maxLength={50}
                       className="h-11"
                     />
                   </div>
+                  <div>
+                    <Label htmlFor="lastName" className="text-sm font-semibold text-foreground mb-2 block">Last Name *</Label>
+                    <Input
+                      id="lastName"
+                      placeholder="Doe"
+                      value={form.lastName}
+                      onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                      maxLength={50}
+                      className="h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Email and Phone */}
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="email" className="text-sm font-semibold text-foreground mb-2 block">Email Address *</Label>
                     <Input
@@ -207,9 +224,20 @@ const JobDetail = () => {
                       className="h-11"
                     />
                   </div>
+                  <div>
+                    <Label htmlFor="phone" className="text-sm font-semibold text-foreground mb-2 block">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      placeholder="+234 (0) 123 456 7890"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      maxLength={30}
+                      className="h-11"
+                    />
+                  </div>
                 </div>
 
-                {/* Row 2: Phone and Position */}
+                {/* Row 3: Position */}
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="phone" className="text-sm font-semibold text-foreground mb-2 block">Phone Number *</Label>

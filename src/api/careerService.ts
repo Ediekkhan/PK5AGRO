@@ -1,8 +1,11 @@
 import apiClient from './apiClient';
 
 export const careerService = {
-  getJobs: async () => {
-    return apiClient.get('/api/Job', { requiresApiKey: true });
+  getJobs: async (code: string) => {
+    return apiClient.get('/api/Job', {
+      params: { code }, 
+      requiresApiKey: true
+    });
   },
 
   getJob: async (id: string) => {
