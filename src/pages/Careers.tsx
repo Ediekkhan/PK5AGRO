@@ -34,7 +34,7 @@ const Careers = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response  = await careerService.getJobs("com.pk5.agro");
+        const response  = await careerService.getJobs("com.pk5.agro.allied");
         const data: any[] = response?.responseData as any[] ;
 
         setJobs(data);
