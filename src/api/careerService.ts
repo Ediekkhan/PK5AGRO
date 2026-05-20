@@ -8,8 +8,10 @@ export const careerService = {
     });
   },
 
-  getJob: async (id: string) => {
-    return apiClient.get(`/api/Job/${id}`, { requiresApiKey: true });
+  getJob: async (id: string, code: string) => {
+    return apiClient.get(`/api/Job/${id}`, { 
+      params: { code }, 
+      requiresApiKey: true });
   },
 
   filterJobApplications: async (filters: any) => {

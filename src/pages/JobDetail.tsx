@@ -22,8 +22,8 @@ const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
 
-  const [job, setJob] = useState<any>(location.state?.job || null);
-  const [loading, setLoading] = useState(!location.state?.job && !!id);
+  const [job, setJob] = useState<any>( null);
+  const [loading, setLoading] = useState( !!id);
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", cover: "" });
   const [cv, setCv] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,10 +34,10 @@ const JobDetail = () => {
     window.scrollTo(0, 0);
 
     const fetchJob = async () => {
-      if (!job && id) {
+      if (id) {
         try {
           setLoading(true);
-          const response = await careerService.getJob(id);
+          const response = await careerService.getJob(id, "com.pk5.agro.allied");
           const jobData = response?.responseData;
           if (jobData) {
             setJob(jobData);
