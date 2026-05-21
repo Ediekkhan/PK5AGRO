@@ -237,29 +237,6 @@ const JobDetail = () => {
                   </div>
                 </div>
 
-                {/* Row 3: Position */}
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="phone" className="text-sm font-semibold text-foreground mb-2 block">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      placeholder="+234 (0) 123 456 7890"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      maxLength={30}
-                      className="h-11"
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-sm font-semibold text-foreground mb-2 block">Position Applied For</Label>
-                    <Input
-                      value={job.title}
-                      readOnly
-                      className="bg-background/60 h-11 cursor-default"
-                    />
-                  </div>
-                </div>
-
                 {/* Cover Letter */}
                 <div>
                   <div className="flex items-center justify-between mb-2">
