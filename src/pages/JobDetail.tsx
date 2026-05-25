@@ -19,6 +19,8 @@ const applicationSchema = z.object({
 });
 
 const JobDetail = () => {
+  const APP_ID = import.meta.env.VITE_APP_ID;
+
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
 
@@ -37,7 +39,7 @@ const JobDetail = () => {
       if (id) {
         try {
           setLoading(true);
-          const response = await careerService.getJob(id, "com.pk5.agro.allied");
+          const response = await careerService.getJob(id, APP_ID);
           const jobData = response?.responseData;
           if (jobData) {
             setJob(jobData);

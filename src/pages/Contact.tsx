@@ -7,9 +7,11 @@ import { Mail, Phone, MapPin, MessageCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { contactService } from "@/api/contactService";
 
+
 function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const APP_ID = import.meta.env.VITE_APP_ID;
 
   // Local state for the form (UI-friendly)
   const [form, setForm] = useState({
@@ -19,7 +21,7 @@ function Contact() {
     company: "",
     inquiryType: "",
     message: "",
-    appId: ""
+    appId: APP_ID
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +38,7 @@ function Contact() {
       phoneNumber: form.phone,
       company: form.company || "Individual",
       subject: form.inquiryType,
-      appId: "com.pk5.agro",
+      appId: APP_ID,
       messageBody: form.message
     };
 

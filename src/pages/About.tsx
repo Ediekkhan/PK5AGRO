@@ -1,4 +1,4 @@
-import { Leaf, Shield, Lightbulb, Award, Eye, Target, BadgeCheck, Briefcase, Building2, Cpu, Factory, GraduationCap, Handshake, ArrowRight, Layers, Linkedin, Mail, Network, Settings2, Sparkles, Sprout, Truck, Wallet, X } from "lucide-react";
+import { Leaf, Shield, Lightbulb, Award, Eye, Target, BadgeCheck, Briefcase, Building2, Cpu, Factory, GraduationCap, Handshake, ArrowRight, Layers, Linkedin, Mail, Network, Settings2, Sparkles, Sprout, Truck, Wallet, X, TrendingUp } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import strategyCrop from "@/assets/strategy-crop.jpg";
@@ -7,6 +7,13 @@ import strategyDistribution from "@/assets/strategy-distribution.jpg";
 import advantagePartnerships from "@/assets/advantage-partnerships.jpg";
 import growthStrategyImg from "@/assets/growth-strategy.jpg";
 import { leadership, type Leader } from "@/data/leadership";
+import visionBg from "@/assets/vision-bg.jpg";
+import missionOperationsImg from "@/assets/mission-operations.jpg";
+import missionProductsImg from "@/assets/mission-products.jpg";
+import missionSustainableImg from "@/assets/mission-sustainable.jpg";
+import missionStakeholderImg from "@/assets/mission-stakeholder.jpg";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const About = () => {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
@@ -47,26 +54,49 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="section-padding bg-background">
-        <div className="container-wide grid md:grid-cols-2 gap-12">
-          <div className="p-8 rounded-xl bg-primary/5 border border-primary/10">
-            <Target className="w-10 h-10 text-accent mb-4" />
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4">Our Mission</h2>
-            <p className="font-body text-muted-foreground leading-relaxed">
-              To development of a large-scale commercial agricultural production and integrated agro-processing project
-              designed to unlock agricultural potential and establish value addition capacity.
-            </p>
-          </div>
-          <div className="p-8 rounded-xl bg-accent/5 border border-accent/10">
-            <Eye className="w-10 h-10 text-accent mb-4" />
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4">Our Vision</h2>
-            <p className="font-body text-muted-foreground leading-relaxed">
-              At PK5 Agro-Allied, our vision is to be become a leading agro-industrial company delivering premium agricultural products to local and global markets.
-            </p>
+      {/* Vision */}
+      <section className="relative overflow-hidden">
+        <div className="relative min-h-[520px] flex items-center">
+          <img
+            src={visionBg}
+            alt="PK5 Agro-Allied palm plantation at sunrise"
+            loading="lazy"
+            width={1920}
+            height={1080}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/80 to-forest/40" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsla(41,55%,51%,0.25),transparent_60%)]" />
+
+          <div className="container-wide relative z-10 section-padding">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="max-w-3xl"
+            >
+              <div className="inline-flex items-center gap-2 mb-6">
+                <span className="h-px w-10 bg-gold" />
+                <Eye className="w-5 h-5 text-gold" />
+                <p className="text-gold font-body text-sm tracking-[0.25em] uppercase">Our Vision</p>
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-[1.1] mb-8">
+                Vision
+              </h2>
+              <p className="font-display italic text-primary-foreground/90 text-xl md:text-2xl lg:text-3xl leading-relaxed">
+                <span className="text-gold text-4xl leading-none align-top mr-1">“</span>
+                At PK5 Agro-Allied, our vision is to be become a leading agro-industrial
+                company delivering premium agricultural products to local and global markets.
+                <span className="text-gold text-4xl leading-none align-bottom ml-1">”</span>
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
+
+      {/* Mission Carousel */}
+      <MissionCarousel />
 
       {/* Core Values */}
       <section className="section-padding bg-muted/50">
@@ -629,6 +659,180 @@ const LeaderPanel = ({ leader, onClose }: { leader: Leader; onClose: () => void 
   </motion.article>
 );
 
+const missionCards = [
+  {
+    icon: Sprout,
+    eyebrow: "Operations",
+    title: "Develop World-Class Agricultural Operations",
+    desc: "Our mission is committed to implementing cutting-edge farming techniques and innovative practices to optimize productivity and efficiency.",
+    image: missionOperationsImg,
+  },
+  {
+    icon: Factory,
+    eyebrow: "Products",
+    title: "Deliver Premium Agricultural Products",
+    desc: "Our mission is to transform raw agricultural produce into premium products, maintaining high standards to meet both local and international market demands.",
+    image: missionProductsImg,
+  },
+  {
+    icon: Leaf,
+    eyebrow: "Sustainability",
+    title: "Drive Sustainable Agricultural Growth",
+    desc: "Our mission is to prioritize environmentally responsible methods that promote soil health, biodiversity, and resource conservation.",
+    image: missionSustainableImg,
+  },
+  {
+    icon: TrendingUp,
+    eyebrow: "Stakeholder Value",
+    title: "Create Long-Term Stakeholder Value",
+    desc: "Our mission focuses on consistent growth and ethical business practices to generate lasting benefits for investors, communities, and partners.",
+    image: missionStakeholderImg,
+  },
+];
+
+const MissionCarousel = () => {
+  const [api, setApi] = useState<CarouselApi | null>(null);
+  const [selected, setSelected] = useState(0);
+  const autoplay = useRef(Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true }));
+
+  useEffect(() => {
+    if (!api) return;
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    onSelect();
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  return (
+    <section className="relative overflow-hidden bg-forest py-20 md:py-28">
+      {/* Ambient background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,hsla(41,55%,51%,0.12),transparent_55%),radial-gradient(circle_at_85%_90%,hsla(157,72%,30%,0.25),transparent_60%)]" />
+      <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 39h40M39 0v40%22 stroke=%22%23ffffff%22 stroke-width=%220.5%22/></svg>')]" />
+
+      <div className="container-wide relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 md:mb-16 max-w-2xl mx-auto"
+        >
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="h-px w-8 bg-gold" />
+            <Target className="w-4 h-4 text-gold" />
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.3em] uppercase">Our Mission</p>
+            <span className="h-px w-8 bg-gold" />
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight">
+            Driving Africa's <span className="text-gradient-gold">Agricultural Future</span>
+          </h2>
+        </motion.div>
+
+        <Carousel
+          setApi={setApi}
+          opts={{ align: "start", loop: true }}
+          plugins={[autoplay.current]}
+          className="relative"
+        >
+          <CarouselContent className="-ml-0">
+            {missionCards.map((card, i) => {
+              const Icon = card.icon;
+              const isActive = selected === i;
+              return (
+                <CarouselItem key={i} className="pl-0 basis-full">
+                  <article className="relative group h-[520px] md:h-[600px] lg:h-[640px] rounded-3xl overflow-hidden shadow-[0_30px_80px_-20px_hsla(157,72%,4%,0.6)] ring-1 ring-white/10">
+                    {/* Background image with parallax/zoom */}
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ scale: 1.1 }}
+                      animate={{ scale: isActive ? 1.0 : 1.1 }}
+                      transition={{ duration: 8, ease: "easeOut" }}
+                    >
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        loading="lazy"
+                        width={1600}
+                        height={1000}
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+
+                    {/* Overlay gradients */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/70 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-transparent to-transparent" />
+
+                    {/* Content */}
+                    <div className="relative h-full flex items-center">
+                      <div className="w-full md:w-3/5 lg:w-1/2 px-6 sm:px-10 md:px-14 lg:px-16 py-10">
+                        <AnimatePresence mode="wait">
+                          {isActive && (
+                            <motion.div
+                              key={i}
+                              initial={{ opacity: 0, y: 30 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -20 }}
+                              transition={{ duration: 0.7, ease: "easeOut" }}
+                            >
+                              {/* Glass icon badge */}
+                              <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-full backdrop-blur-md bg-white/10 border border-white/20">
+                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gold/20 text-gold">
+                                  <Icon className="w-4 h-4" />
+                                </span>
+                                <span className="text-gold font-body text-xs tracking-[0.25em] uppercase">
+                                  {card.eyebrow}
+                                </span>
+                              </div>
+
+                              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-[1.1] mb-6 drop-shadow-lg">
+                                {card.title}
+                              </h3>
+                              <div className="h-[2px] w-16 bg-gold mb-6" />
+                              <p className="font-body text-base md:text-lg text-primary-foreground/85 leading-relaxed max-w-xl">
+                                {card.desc}
+                              </p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  </article>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+
+          {/* Navigation arrows */}
+          <CarouselPrevious className="hidden md:flex left-6 lg:left-10 h-12 w-12 bg-white/10 backdrop-blur-md border-white/20 text-primary-foreground hover:bg-gold hover:text-forest hover:border-gold shadow-xl z-10" />
+          <CarouselNext className="hidden md:flex right-6 lg:right-10 h-12 w-12 bg-white/10 backdrop-blur-md border-white/20 text-primary-foreground hover:bg-gold hover:text-forest hover:border-gold shadow-xl z-10" />
+        </Carousel>
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-3 mt-10">
+          {missionCards.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => api?.scrollTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="group relative h-2 flex items-center"
+            >
+              <span
+                className={`block h-[3px] rounded-full transition-all duration-500 ${
+                  selected === i
+                    ? "w-12 bg-gold"
+                    : "w-6 bg-primary-foreground/25 group-hover:bg-primary-foreground/50"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 // const PanelBlock = ({
 //   icon: Icon,
 //   title,
