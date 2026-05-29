@@ -4,6 +4,7 @@ import StatsSection from "@/components/StatsSection";
 import AboutPreview from "@/components/AboutPreview";
 import SustainabilitySection from "@/components/SustainabilitySection";
 import CTASection from "@/components/CTASection";
+import CoreOperations from "@/components/CoreOperations";
 
 const Index = () => {
   return (
@@ -11,7 +12,8 @@ const Index = () => {
       <HeroSection />
       <ProductsPreview />
       {/* <StatsSection /> */}
-      <AboutPreview />
+      <AboutPreview />     
+      <CoreOperations />
       <SustainabilitySection />
       <CTASection />
     </main>
