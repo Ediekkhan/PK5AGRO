@@ -93,7 +93,7 @@ const Footer = () => {
               >
                 <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
-                  Head Office: 5901 Peachtree Dunwoody Road, Suite A310, Atlanta, GA 30328, USA
+                  USA Office: 5901 Peachtree Dunwoody Road, Suite A310, Atlanta, GA 30328, USA
                 </span>
               </a>
 
@@ -105,7 +105,7 @@ const Footer = () => {
               >
                 <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
                 <span className="font-body text-sm text-primary-foreground/60 hover:text-primary-foreground">
-                  2/5, Nza Street, Independence Layout Enugu, Enugu State, Nigeria
+                  Enugu, Nigeria Office: 2/4, Nza Street, Independence Layout Enugu, Enugu State, Nigeria
                 </span>
               </a>
 

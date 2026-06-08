@@ -77,13 +77,13 @@ const Careers = () => {
   return (
     <main className="bg-background">
       {/* Hero */}
-      <section className="relative bg-forest-gradient pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="container-wide px-4 sm:px-6 lg:px-8 text-primary-foreground">
-          <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-4">Careers at PK5</p>
+      <section className="section-padding text-center bg-forest-gradient pt-32 pb-20 md:pt-40 md:pb-28">
+        <div className="container-wide max-w-5xl px-4 sm:px-6 lg:px-8 text-primary-foreground">
+          <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">Careers at PK5</p>
           <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
-            Build the Future of <span className="text-gradient-gold">Agriculture</span> with PK5
+            Build the Future of Agriculture with PK5
           </h1>
-          <p className="font-body text-base md:text-lg text-primary-foreground/75 max-w-2xl mt-6 leading-relaxed">
+          <p className="font-body text-center text-base md:text-lg text-primary-foreground/75 max-w-5xl mt-6 leading-relaxed">
             We are advancing large-scale agro-processing, value chain development, and sustainable
             agricultural transformation across Africa. Join a team building the institutional
             backbone of the continent's next generation of agribusiness.

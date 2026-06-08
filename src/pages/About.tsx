@@ -1,4 +1,4 @@
-import { Leaf, Shield, Lightbulb, Award, Eye, Target, BadgeCheck, Briefcase, Building2, Cpu, Factory, GraduationCap, Handshake, ArrowRight, Layers, Linkedin, Mail, Network, Settings2, Sparkles, Sprout, Truck, Wallet, X, TrendingUp } from "lucide-react";
+import { Leaf, Shield, Lightbulb, Award, Eye, Target, Building2, Cpu, Factory, Handshake, ArrowRight, Layers, Linkedin, Mail, Network, Settings2, Sprout, Truck, Wallet, X, TrendingUp } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import strategyCrop from "@/assets/strategy-crop.jpg";
@@ -40,9 +40,9 @@ const About = () => {
   }, []);
 
   return (
-    <main className="pt-20">
+    <main className="bg-background">
       {/* Hero */}
-      <section className="section-padding bg-forest-gradient text-center">
+      <section className="section-padding pt-32 md:pt-40 md:pb-28 bg-forest-gradient text-center">
         <div className="container-wide max-w-3xl">
           <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">About Us</p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
