@@ -787,7 +787,7 @@ const MissionCarousel = () => {
                                 </span>
                               </div>
 
-                              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-[1.1] mb-6 drop-shadow-lg">
+                              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-[1.1] mb-6 ml-6 drop-shadow-lg">
                                 {card.title}
                               </h3>
                               <div className="h-[2px] w-16 bg-gold mb-6" />
