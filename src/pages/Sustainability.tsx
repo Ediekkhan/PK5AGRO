@@ -50,8 +50,8 @@ const economicPillars = [
 ];
 const Sustainability = () => {
   return (
-    <main className="pt-20">
-      <section className="section-padding bg-forest-gradient text-center">
+    <main className="bg-background">
+      <section className="section-padding pt-32 md:pt-40 md:pb-28 bg-forest-gradient text-center">
         <div className="container-wide max-w-3xl">
           <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">Sustainability</p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
