@@ -1,4 +1,4 @@
-import { lazy, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,7 +11,6 @@ import { locations } from "@/data/location";
 const LocationsMap = lazy(() => import("@/components/ui/locationsMap"));
 
 const actualLocations = locations.map((loc) => loc.actualAddress);
-// const displayLocations = locations.map((loc) => loc.displayAddress);
 
 function Contact() {
   const { toast } = useToast();
@@ -233,18 +232,15 @@ function Contact() {
           </div>
 
           <div className="rounded-xl overflow-hidden border border-border h-96 bg-muted flex items-center justify-center">
-            {/* <iframe
-              title="Global Office Locations"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=5901%20Peachtree%20Dunwoody%20Road,%20Suite%20A310,%20Atlanta,%20GA%2030328,%20USA&output=embed"
-            /> */}
-
-            <LocationsMap locations={actualLocations} />
+            {/* Safe loading bridge during async transitions */}
+            <Suspense fallback={
+              <div className="flex flex-col items-center gap-2">
+                <Loader2 className="h-6 w-6 animate-spin text-gold" />
+                <span className="text-xs text-muted-foreground">Loading Map System...</span>
+              </div>
+            }>
+              <LocationsMap locations={actualLocations} />
+            </Suspense>
           </div>
 
         </div>

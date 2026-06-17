@@ -776,6 +776,7 @@ const MissionCarousel = () => {
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -20 }}
                               transition={{ duration: 0.7, ease: "easeOut" }}
+                              className="relative px-10"
                             >
                               {/* Glass icon badge */}
                               <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-full backdrop-blur-md bg-white/10 border border-white/20">
@@ -787,7 +788,7 @@ const MissionCarousel = () => {
                                 </span>
                               </div>
 
-                              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-[1.1] mb-6 ml-6 drop-shadow-lg">
+                              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-[1.1] mb-6 drop-shadow-lg">
                                 {card.title}
                               </h3>
                               <div className="h-[2px] w-16 bg-gold mb-6" />
