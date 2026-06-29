@@ -1,3 +1,5 @@
+import { useEffect } from "react"; // 1. Add useEffect
+import { useLocation } from "react-router-dom"; // 2. Add useLocation
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +20,22 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 
 const queryClient = new QueryClient();
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Fix for standard window scrolling
+    window.scrollTo(0, 0);
+    
+    // Fix if you have Radix ScrollArea components hidden inside individual pages
+    const radixViewports = document.querySelectorAll('[data-radix-scroll-area-viewport]');
+    radixViewports.forEach((viewport) => {
+      viewport.scrollTop = 0;
+    });
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -25,6 +43,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop /> 
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
