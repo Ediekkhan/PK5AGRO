@@ -39,6 +39,23 @@ const About = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const handleClose = () => {
+    const previousSlug = activeSlug;
+    setActiveSlug(null);
+
+    setTimeout(() => {
+      if (previousSlug) {
+        const element = document.getElementById(`leader-card-${previousSlug}`);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "center", // Brings it nicely into the viewport view area without jumping erratic amounts
+          });
+        }
+      }
+    }, 100);
+  };
+
   return (
     <main className="bg-background">
       {/* Hero */}
@@ -182,8 +199,15 @@ const About = () => {
               return (
                 <button
                   key={person.slug}
+                  id={`leader-card-${person.slug}`} // FIX: Added dynamic ID to map target
                   type="button"
-                  onClick={() => setActiveSlug(isActive ? null : person.slug)}
+                  onClick={() => {
+                    if (isActive) {
+                      handleClose(); // FIX: Call custom handler instead of basic state updates
+                    } else {
+                      setActiveSlug(person.slug);
+                    }
+                  }}
                   aria-expanded={isActive}
                   aria-controls="leader-detail-panel"
                   aria-label={`${isActive ? "Close" : "Open"} full profile of ${person.name}, ${person.role}`}
@@ -219,14 +243,6 @@ const About = () => {
                     <div className="flex items-center justify-between mt-5 pt-5 border-t border-border">
                       <div className="flex items-center gap-3">
                         <a
-                          href={person.linkedin}
-                          onClick={(e) => e.stopPropagation()}
-                          aria-label={`${person.name} on LinkedIn`}
-                          className="w-9 h-9 rounded-full flex items-center justify-center bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
-                        >
-                          <Linkedin className="w-4 h-4" />
-                        </a>
-                        <a
                           href={person.email}
                           onClick={(e) => e.stopPropagation()}
                           aria-label={`Email ${person.name}`}
@@ -247,7 +263,7 @@ const About = () => {
 
           {/* Inline expanded profile panel */}
           <AnimatePresence initial={false} mode="wait">
-            {active && (
+            {activeSlug !== null && active && (
               <motion.div
                 key={active.slug}
                 id="leader-detail-panel"
@@ -258,7 +274,8 @@ const About = () => {
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="overflow-hidden mt-10"
               >
-                <LeaderPanel leader={active} onClose={() => setActiveSlug(null)} />
+                {/* FIX: Swapped inner panel callback target to handleClose */}
+                <LeaderPanel leader={active} onClose={handleClose} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -587,13 +604,14 @@ const LeaderPanel = ({ leader, onClose }: { leader: Leader; onClose: () => void 
         </p>
 
         <div className="flex items-center gap-3 mt-5">
-          <a
+          {/* linkedin icon beside email icon */}
+          {/* <a
             href={leader.linkedin}
             aria-label={`${leader.name} on LinkedIn`}
             className="w-10 h-10 rounded-full flex items-center justify-center bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             <Linkedin className="w-4 h-4" />
-          </a>
+          </a> */}
           <a
             href={leader.email}
             aria-label={`Email ${leader.name}`}
@@ -821,11 +839,10 @@ const MissionCarousel = () => {
               className="group relative h-2 flex items-center"
             >
               <span
-                className={`block h-[3px] rounded-full transition-all duration-500 ${
-                  selected === i
-                    ? "w-12 bg-gold"
-                    : "w-6 bg-primary-foreground/25 group-hover:bg-primary-foreground/50"
-                }`}
+                className={`block h-[3px] rounded-full transition-all duration-500 ${selected === i
+                  ? "w-12 bg-gold"
+                  : "w-6 bg-primary-foreground/25 group-hover:bg-primary-foreground/50"
+                  }`}
               />
             </button>
           ))}

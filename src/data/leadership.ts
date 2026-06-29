@@ -96,7 +96,7 @@ export const leadership: Leader[] = [
         email: "mailto:peter@pk5agro.com",
     },
     {
-        slug: "ibrahim-musa",
+        slug: "alozie-okwukanma",
         name: "Alozie Okwukanma",
         role: "HEAD OF ICT",
         image: alozieImg,
@@ -127,7 +127,7 @@ export const leadership: Leader[] = [
         specializations: ["Export operations", "International negotiation", "Trade finance"],
         certifications: ["Certified International Trade Professional (CITP)", "Member, Nigerian Export Promotion Council"],
         linkedin: "#",
-        email: "mailto:ibrahim@pk5agro.com",
+        email: "mailto:alozie@pk5agro.com",
     },
 ];
 
