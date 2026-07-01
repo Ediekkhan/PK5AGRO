@@ -53,7 +53,9 @@ const Sustainability = () => {
     <main className="bg-background">
       <section className="section-padding pt-32 md:pt-40 md:pb-28 bg-forest-gradient text-center">
         <div className="container-wide max-w-3xl">
-          <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">Sustainability</p>
+          <p className="text-gold font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
+            Sustainability
+          </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
             Growing Responsibly
           </h1>
@@ -126,7 +128,7 @@ const Sustainability = () => {
         <div className="container-wide relative">
           <div className="grid lg:grid-cols-[1fr_1.15fr] gap-12 lg:gap-16 items-start">
             <div className="lg:sticky lg:top-28">
-              <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+              <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
                 National Alignment
               </p>
               <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-5">
@@ -184,7 +186,7 @@ const Sustainability = () => {
       <section className="relative section-padding bg-background overflow-hidden">
         <div className="container-wide">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+            <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
               Economic Impact
             </p>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-5">
