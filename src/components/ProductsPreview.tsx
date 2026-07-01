@@ -29,7 +29,7 @@ const ProductsPreview = () => {
     <section className="section-padding bg-background">
       <div className="container-wide">
         <div className="text-center mb-16">
-          <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+          <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
             What We Grow & Process
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">

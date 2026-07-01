@@ -58,7 +58,9 @@ const Products = () => {
     <main className="bg-background">
       <section className="section-padding pt-32 md:pt-40 md:pb-28 bg-forest-gradient text-center">
         <div className="container-wide max-w-3xl">
-          <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">Our Products</p>
+          <p className="text-gold font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
+            Our Products
+          </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
             Premium Agricultural Products
           </h1>
@@ -82,7 +84,7 @@ const Products = () => {
                 </div>
               </div>
               <div className={idx % 2 !== 0 ? "md:order-1" : ""}>
-                <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-2">
+                <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
                   {product.tagline}
                 </p>
                 <h2 className="font-display text-3xl font-bold text-foreground mb-4">

@@ -61,7 +61,7 @@ const About = () => {
       {/* Hero */}
       <section className="section-padding pt-32 md:pt-40 md:pb-28 bg-forest-gradient text-center">
         <div className="container-wide max-w-3xl">
-          <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">About Us</p>
+          <p className="text-gold font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">About Us</p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
             Our Story
           </h1>
@@ -119,7 +119,7 @@ const About = () => {
       <section className="section-padding bg-muted/50">
         <div className="container-wide">
           <div className="text-center mb-16">
-            <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">What Drives Us</p>
+            <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">What Drives Us</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">Core Values</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -182,7 +182,7 @@ const About = () => {
         />
         <div className="container-wide relative">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">Leadership</p>
+            <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">Leadership</p>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-5">
               PK5 Agro-Allied Leadership
             </h2>
@@ -286,7 +286,7 @@ const About = () => {
       <section className="section-padding bg-background">
         <div className="container-wide">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+            <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
               Strategic Focus Areas
             </p>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-5">
@@ -386,7 +386,7 @@ const About = () => {
         <div className="container-wide relative">
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
             <div>
-              <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+              <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
                 Competitive Advantage
               </p>
               <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-5">
@@ -465,7 +465,7 @@ const About = () => {
         <div className="container-wide">
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-14 items-start">
             <div className="lg:sticky lg:top-28">
-              <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+              <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
                 Growth Strategy
               </p>
               <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-5">

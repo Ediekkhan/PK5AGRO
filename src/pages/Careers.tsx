@@ -79,7 +79,9 @@ const Careers = () => {
       {/* Hero */}
       <section className="section-padding text-center bg-forest-gradient pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="container-wide max-w-5xl px-4 sm:px-6 lg:px-8 text-primary-foreground">
-          <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-3">Careers at PK5</p>
+          <p className="text-gold font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
+            Careers at PK5
+          </p>
           <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
             Build the Future of Agriculture with PK5
           </h1>
@@ -95,7 +97,9 @@ const Careers = () => {
       <section className="section-padding">
         <div className="container-wide grid md:grid-cols-2 gap-12 items-start">
           <div>
-            <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-3">Working at PK5</p>
+            <p className="font-body text-xs tracking-[0.18em] text-gold md:text-base font-semibold uppercase mb-4 leading-relaxed">
+              Working at PK5
+            </p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight">
               Working at PK5 Agro Allied
             </h2>
@@ -122,7 +126,9 @@ const Careers = () => {
       <section className="section-padding bg-muted/40">
         <div className="container-wide">
           <div className="max-w-3xl mb-12">
-            <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-3">Why Join</p>
+            <p className="font-body text-xs tracking-[0.18em] text-gold md:text-base font-semibold uppercase mb-4 leading-relaxed">
+              Why Join
+            </p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight">
               Why Join PK5 Agro Allied
             </h2>
@@ -146,12 +152,14 @@ const Careers = () => {
           </div>
         </div>
       </section>
-
+            
       {/* Open Roles */}
       <section className="section-padding">
         <div className="container-wide">
           <div className="mb-10">
-            <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-3">Open Positions</p>
+            <p className="font-body text-xs tracking-[0.18em] text-gold md:text-base font-semibold uppercase mb-4 leading-relaxed">
+              Open Positions
+            </p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight">
               Current Opportunities
             </h2>
@@ -225,7 +233,9 @@ const Careers = () => {
       <section className="section-padding bg-forest-gradient">
         <div className="container-wide grid md:grid-cols-2 gap-12 items-center text-primary-foreground">
           <div>
-            <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-3">Talent Network</p>
+            <p className="font-body text-xs tracking-[0.18em] text-gold md:text-base font-semibold uppercase mb-4 leading-relaxed">
+              Talent Network
+            </p>
             <h2 className="font-display text-3xl md:text-4xl font-bold leading-tight mb-4">
               Don't see the right role? Join our Talent Network.
             </h2>

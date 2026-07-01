@@ -55,7 +55,7 @@ const SectionHeader = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1.2, ease: [1, 0, 0, 1] }}
-        className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-4"
+        className="text-gold font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed"
       >
         What We Do
       </motion.p>
@@ -111,7 +111,7 @@ const OperationCard = ({
           height={768}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" /> */}
         {/* Floating icon badge */}
         <div
           className={`absolute top-4 left-4 w-12 h-12 rounded-xl ${operation.iconBg} backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg`}

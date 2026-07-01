@@ -29,7 +29,7 @@ const AboutPreview = () => {
       <div className="container-wide">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-accent font-body text-sm tracking-[0.2em] uppercase mb-3">
+            <p className="text-accent font-body text-sm md:text-base font-semibold tracking-[0.18em] uppercase mb-4 leading-relaxed">
               Who We Are
             </p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
